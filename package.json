@@ -1,0 +1,12 @@
+{
+  "name": "bosta-task-iv-security",
+  "version": "1.0.0",
+  "private": true,
+  "devDependencies": {
+    "newman": "^6.1.0",
+    "newman-reporter-htmlextra": "^1.23.1"
+  },
+  "scripts": {
+    "test:api-security": "newman run postman/Bosta_Task_IV.postman_collection.json --reporters cli,junit,htmlextra --reporter-junit-export reports/junit.xml --reporter-htmlextra-export reports/report.html --reporter-htmlextra-title \"Bosta Task IV Security Suite\" --timeout-request 30000"
+  }
+}

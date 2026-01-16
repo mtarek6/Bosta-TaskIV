@@ -1,0 +1,3753 @@
+{
+  "info": {
+    "_postman_id": "08aa3d18-3101-4165-aae1-4147246435cc",
+    "name": "Bosta_Task_IV",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "46366677",
+    "_collection_link": "https://go.postman.co/collection/46366677-08aa3d18-3101-4165-aae1-4147246435cc?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "API1 — Create Pickup (Security)",
+      "item": [
+        {
+          "name": "API1-BASE — Create Pickup (valid)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status is success (2xx)\", function () {\r",
+                  "  pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response is JSON\", function () {\r",
+                  "  pm.response.to.be.json;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"No sensitive leakage (baseline)\", function () {\r",
+                  "  const raw = pm.response.text();\r",
+                  "  pm.expect(raw).to.not.match(/stack\\s*trace|traceback|exception|node_modules|\\/var\\/|c:\\\\\\\\|sql|mongodb/i);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": " application/json, text/plain, */*",
+                "type": "text"
+              },
+              {
+                "key": "accept-language",
+                "value": " en",
+                "type": "text"
+              },
+              {
+                "key": "content-type",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "origin",
+                "value": " https://stg-business.bosta.co",
+                "type": "text"
+              },
+              {
+                "key": "priority",
+                "value": " u=1, i",
+                "type": "text"
+              },
+              {
+                "key": "referer",
+                "value": " https://stg-business.bosta.co/",
+                "type": "text"
+              },
+              {
+                "key": "sec-ch-ua",
+                "value": " \"Google Chrome\";v=\"137\", \"Chromium\";v=\"137\", \"Not/A)Brand\";v=\"24\"",
+                "type": "text"
+              },
+              {
+                "key": "sec-ch-ua-mobile",
+                "value": " ?0",
+                "type": "text"
+              },
+              {
+                "key": "sec-ch-ua-platform",
+                "value": " \"Windows\"",
+                "type": "text"
+              },
+              {
+                "key": "sec-fetch-dest",
+                "value": " empty",
+                "type": "text"
+              },
+              {
+                "key": "sec-fetch-mode",
+                "value": " cors",
+                "type": "text"
+              },
+              {
+                "key": "sec-fetch-site",
+                "value": " same-site",
+                "type": "text"
+              },
+              {
+                "key": "user-agent",
+                "value": " Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+                "type": "text"
+              },
+              {
+                "key": "x-device-fingerprint",
+                "value": "1hgtilh",
+                "type": "text"
+              },
+              {
+                "key": "x-device-id",
+                "value": "01JV70TKSFGV9Z1QWEYV3N5APC",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{authToken1}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"businessLocationId\": \"{{businessLocationId}}\",\r\n  \"contactPerson\": {\r\n    \"_id\": \"{{contactPersonId}}\",\r\n    \"name\": \"{{contactName}}\",\r\n    \"email\": \"{{contactEmail}}\",\r\n    \"phone\": \"{{contactPhone}}\"\r\n  },\r\n  \"scheduledDate\": \"{{scheduledDate}}\",\r\n  \"numberOfParcels\": \"{{parcels}}\",\r\n  \"hasBigItems\": false,\r\n  \"repeatedData\": { \"repeatedType\": \"One Time\" },\r\n  \"creationSrc\": \"Web\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{stgBaseUrl}}/api/v2/pickups",
+              "host": [
+                "{{stgBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "pickups"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "API1-AUTH-001 — Missing Authorization header",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Unauthorized without token\", function () {\r",
+                  "  pm.expect(pm.response.code).to.be.oneOf([401, 403]);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": " application/json, text/plain, */*",
+                "type": "text"
+              },
+              {
+                "key": "accept-language",
+                "value": " en",
+                "type": "text"
+              },
+              {
+                "key": "content-type",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "origin",
+                "value": " https://stg-business.bosta.co",
+                "type": "text"
+              },
+              {
+                "key": "priority",
+                "value": " u=1, i",
+                "type": "text"
+              },
+              {
+                "key": "referer",
+                "value": " https://stg-business.bosta.co/",
+                "type": "text"
+              },
+              {
+                "key": "sec-ch-ua",
+                "value": " \"Google Chrome\";v=\"137\", \"Chromium\";v=\"137\", \"Not/A)Brand\";v=\"24\"",
+                "type": "text"
+              },
+              {
+                "key": "sec-ch-ua-mobile",
+                "value": " ?0",
+                "type": "text"
+              },
+              {
+                "key": "sec-ch-ua-platform",
+                "value": " \"Windows\"",
+                "type": "text"
+              },
+              {
+                "key": "sec-fetch-dest",
+                "value": " empty",
+                "type": "text"
+              },
+              {
+                "key": "sec-fetch-mode",
+                "value": " cors",
+                "type": "text"
+              },
+              {
+                "key": "sec-fetch-site",
+                "value": " same-site",
+                "type": "text"
+              },
+              {
+                "key": "user-agent",
+                "value": " Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+                "type": "text"
+              },
+              {
+                "key": "x-device-fingerprint",
+                "value": "1hgtilh",
+                "type": "text"
+              },
+              {
+                "key": "x-device-id",
+                "value": "01JV70TKSFGV9Z1QWEYV3N5APC",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{authToken}}",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"businessLocationId\": \"{{businessLocationId}}\",\r\n  \"contactPerson\": {\r\n    \"_id\": \"{{contactPersonId}}\",\r\n    \"name\": \"{{contactName}}\",\r\n    \"email\": \"{{contactEmail}}\",\r\n    \"phone\": \"{{contactPhone}}\"\r\n  },\r\n  \"scheduledDate\": \"2026-10-21\",\r\n  \"numberOfParcels\": \"{{parcels}}\",\r\n  \"hasBigItems\": false,\r\n  \"repeatedData\": { \"repeatedType\": \"One Time\" },\r\n  \"creationSrc\": \"Web\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{stgBaseUrl}}/api/v2/pickups",
+              "host": [
+                "{{stgBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "pickups"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "API1-AUTH-002 — Invalid token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Unauthorized with invalid token\", function () {\r",
+                  "  pm.expect(pm.response.code).to.be.oneOf([401, 403]);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": " application/json, text/plain, */*",
+                "type": "text"
+              },
+              {
+                "key": "accept-language",
+                "value": " en",
+                "type": "text"
+              },
+              {
+                "key": "content-type",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "origin",
+                "value": " https://stg-business.bosta.co",
+                "type": "text"
+              },
+              {
+                "key": "priority",
+                "value": " u=1, i",
+                "type": "text"
+              },
+              {
+                "key": "referer",
+                "value": " https://stg-business.bosta.co/",
+                "type": "text"
+              },
+              {
+                "key": "sec-ch-ua",
+                "value": " \"Google Chrome\";v=\"137\", \"Chromium\";v=\"137\", \"Not/A)Brand\";v=\"24\"",
+                "type": "text"
+              },
+              {
+                "key": "sec-ch-ua-mobile",
+                "value": " ?0",
+                "type": "text"
+              },
+              {
+                "key": "sec-ch-ua-platform",
+                "value": " \"Windows\"",
+                "type": "text"
+              },
+              {
+                "key": "sec-fetch-dest",
+                "value": " empty",
+                "type": "text"
+              },
+              {
+                "key": "sec-fetch-mode",
+                "value": " cors",
+                "type": "text"
+              },
+              {
+                "key": "sec-fetch-site",
+                "value": " same-site",
+                "type": "text"
+              },
+              {
+                "key": "user-agent",
+                "value": " Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+                "type": "text"
+              },
+              {
+                "key": "x-device-fingerprint",
+                "value": "1hgtilh",
+                "type": "text"
+              },
+              {
+                "key": "x-device-id",
+                "value": "01JV70TKSFGV9Z1QWEYV3N5APC",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "invalid_token",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"businessLocationId\": \"{{businessLocationId}}\",\r\n  \"contactPerson\": {\r\n    \"_id\": \"{{contactPersonId}}\",\r\n    \"name\": \"{{contactName}}\",\r\n    \"email\": \"{{contactEmail}}\",\r\n    \"phone\": \"{{contactPhone}}\"\r\n  },\r\n  \"scheduledDate\": \"2026-10-21\",\r\n  \"numberOfParcels\": \"{{parcels}}\",\r\n  \"hasBigItems\": false,\r\n  \"repeatedData\": { \"repeatedType\": \"One Time\" },\r\n  \"creationSrc\": \"Web\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{stgBaseUrl}}/api/v2/pickups",
+              "host": [
+                "{{stgBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "pickups"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "API1-AUTH-003 — Empty token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Unauthorized without token\", function () {\r",
+                  "  pm.expect(pm.response.code).to.be.oneOf([401, 403]);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": " application/json, text/plain, */*",
+                "type": "text"
+              },
+              {
+                "key": "accept-language",
+                "value": " en",
+                "type": "text"
+              },
+              {
+                "key": "content-type",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "origin",
+                "value": " https://stg-business.bosta.co",
+                "type": "text"
+              },
+              {
+                "key": "priority",
+                "value": " u=1, i",
+                "type": "text"
+              },
+              {
+                "key": "referer",
+                "value": " https://stg-business.bosta.co/",
+                "type": "text"
+              },
+              {
+                "key": "sec-ch-ua",
+                "value": " \"Google Chrome\";v=\"137\", \"Chromium\";v=\"137\", \"Not/A)Brand\";v=\"24\"",
+                "type": "text"
+              },
+              {
+                "key": "sec-ch-ua-mobile",
+                "value": " ?0",
+                "type": "text"
+              },
+              {
+                "key": "sec-ch-ua-platform",
+                "value": " \"Windows\"",
+                "type": "text"
+              },
+              {
+                "key": "sec-fetch-dest",
+                "value": " empty",
+                "type": "text"
+              },
+              {
+                "key": "sec-fetch-mode",
+                "value": " cors",
+                "type": "text"
+              },
+              {
+                "key": "sec-fetch-site",
+                "value": " same-site",
+                "type": "text"
+              },
+              {
+                "key": "user-agent",
+                "value": " Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+                "type": "text"
+              },
+              {
+                "key": "x-device-fingerprint",
+                "value": "1hgtilh",
+                "type": "text"
+              },
+              {
+                "key": "x-device-id",
+                "value": "01JV70TKSFGV9Z1QWEYV3N5APC",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"businessLocationId\": \"{{businessLocationId}}\",\r\n  \"contactPerson\": {\r\n    \"_id\": \"{{contactPersonId}}\",\r\n    \"name\": \"{{contactName}}\",\r\n    \"email\": \"{{contactEmail}}\",\r\n    \"phone\": \"{{contactPhone}}\"\r\n  },\r\n  \"scheduledDate\": \"2026-10-21\",\r\n  \"numberOfParcels\": \"{{parcels}}\",\r\n  \"hasBigItems\": false,\r\n  \"repeatedData\": { \"repeatedType\": \"One Time\" },\r\n  \"creationSrc\": \"Web\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{stgBaseUrl}}/api/v2/pickups",
+              "host": [
+                "{{stgBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "pickups"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "API1-AUTHZ-001",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": " application/json, text/plain, */*",
+                "type": "text"
+              },
+              {
+                "key": "accept-language",
+                "value": " en",
+                "type": "text"
+              },
+              {
+                "key": "content-type",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "origin",
+                "value": " https://stg-business.bosta.co",
+                "type": "text"
+              },
+              {
+                "key": "priority",
+                "value": " u=1, i",
+                "type": "text"
+              },
+              {
+                "key": "referer",
+                "value": " https://stg-business.bosta.co/",
+                "type": "text"
+              },
+              {
+                "key": "sec-ch-ua",
+                "value": " \"Google Chrome\";v=\"137\", \"Chromium\";v=\"137\", \"Not/A)Brand\";v=\"24\"",
+                "type": "text"
+              },
+              {
+                "key": "sec-ch-ua-mobile",
+                "value": " ?0",
+                "type": "text"
+              },
+              {
+                "key": "sec-ch-ua-platform",
+                "value": " \"Windows\"",
+                "type": "text"
+              },
+              {
+                "key": "sec-fetch-dest",
+                "value": " empty",
+                "type": "text"
+              },
+              {
+                "key": "sec-fetch-mode",
+                "value": " cors",
+                "type": "text"
+              },
+              {
+                "key": "sec-fetch-site",
+                "value": " same-site",
+                "type": "text"
+              },
+              {
+                "key": "user-agent",
+                "value": " Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+                "type": "text"
+              },
+              {
+                "key": "x-device-fingerprint",
+                "value": "1hgtilh",
+                "type": "text"
+              },
+              {
+                "key": "x-device-id",
+                "value": "01JV70TKSFGV9Z1QWEYV3N5APC",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{authToken1}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"businessLocationId\": \"{{businessLocationId}}\",\r\n  \"contactPerson\": {\r\n    \"_id\": \"{{contactPersonId}}\",\r\n    \"name\": \"{{contactName}}\",\r\n    \"email\": \"{{contactEmail}}\",\r\n    \"phone\": \"{{contactPhone}}\"\r\n  },\r\n  \"scheduledDate\": \"2026-10-02\",\r\n  \"numberOfParcels\": \"{{parcels}}\",\r\n  \"hasBigItems\": false,\r\n  \"repeatedData\": { \"repeatedType\": \"One Time\" },\r\n  \"creationSrc\": \"Web\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{stgBaseUrl}}/api/v2/pickups",
+              "host": [
+                "{{stgBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "pickups"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "API1-VAL-001 — scheduledDate in the past",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Past scheduledDate is rejected\", function () {\r",
+                  "  pm.expect(pm.response.code).to.be.oneOf([400, 422]);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": " application/json, text/plain, */*",
+                "type": "text"
+              },
+              {
+                "key": "accept-language",
+                "value": " en",
+                "type": "text"
+              },
+              {
+                "key": "content-type",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "origin",
+                "value": " https://stg-business.bosta.co",
+                "type": "text"
+              },
+              {
+                "key": "priority",
+                "value": " u=1, i",
+                "type": "text"
+              },
+              {
+                "key": "referer",
+                "value": " https://stg-business.bosta.co/",
+                "type": "text"
+              },
+              {
+                "key": "sec-ch-ua",
+                "value": " \"Google Chrome\";v=\"137\", \"Chromium\";v=\"137\", \"Not/A)Brand\";v=\"24\"",
+                "type": "text"
+              },
+              {
+                "key": "sec-ch-ua-mobile",
+                "value": " ?0",
+                "type": "text"
+              },
+              {
+                "key": "sec-ch-ua-platform",
+                "value": " \"Windows\"",
+                "type": "text"
+              },
+              {
+                "key": "sec-fetch-dest",
+                "value": " empty",
+                "type": "text"
+              },
+              {
+                "key": "sec-fetch-mode",
+                "value": " cors",
+                "type": "text"
+              },
+              {
+                "key": "sec-fetch-site",
+                "value": " same-site",
+                "type": "text"
+              },
+              {
+                "key": "user-agent",
+                "value": " Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+                "type": "text"
+              },
+              {
+                "key": "x-device-fingerprint",
+                "value": "1hgtilh",
+                "type": "text"
+              },
+              {
+                "key": "x-device-id",
+                "value": "01JV70TKSFGV9Z1QWEYV3N5APC",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{authToken1}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"businessLocationId\": \"{{businessLocationId}}\",\r\n  \"contactPerson\": {\r\n    \"_id\": \"{{contactPersonId}}\",\r\n    \"name\": \"{{contactName}}\",\r\n    \"email\": \"{{contactEmail}}\",\r\n    \"phone\": \"{{contactPhone}}\"\r\n  },\r\n  \"scheduledDate\": \"2025-10-21\",\r\n  \"numberOfParcels\": \"{{parcels}}\",\r\n  \"hasBigItems\": false,\r\n  \"repeatedData\": { \"repeatedType\": \"One Time\" },\r\n  \"creationSrc\": \"Web\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{stgBaseUrl}}/api/v2/pickups",
+              "host": [
+                "{{stgBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "pickups"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "API1-VAL-002 — scheduledDate invalid format",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 400\", function () {\r",
+                  "    pm.response.to.have.status(400);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": " application/json, text/plain, */*",
+                "type": "text"
+              },
+              {
+                "key": "accept-language",
+                "value": " en",
+                "type": "text"
+              },
+              {
+                "key": "content-type",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "origin",
+                "value": " https://stg-business.bosta.co",
+                "type": "text"
+              },
+              {
+                "key": "priority",
+                "value": " u=1, i",
+                "type": "text"
+              },
+              {
+                "key": "referer",
+                "value": " https://stg-business.bosta.co/",
+                "type": "text"
+              },
+              {
+                "key": "sec-ch-ua",
+                "value": " \"Google Chrome\";v=\"137\", \"Chromium\";v=\"137\", \"Not/A)Brand\";v=\"24\"",
+                "type": "text"
+              },
+              {
+                "key": "sec-ch-ua-mobile",
+                "value": " ?0",
+                "type": "text"
+              },
+              {
+                "key": "sec-ch-ua-platform",
+                "value": " \"Windows\"",
+                "type": "text"
+              },
+              {
+                "key": "sec-fetch-dest",
+                "value": " empty",
+                "type": "text"
+              },
+              {
+                "key": "sec-fetch-mode",
+                "value": " cors",
+                "type": "text"
+              },
+              {
+                "key": "sec-fetch-site",
+                "value": " same-site",
+                "type": "text"
+              },
+              {
+                "key": "user-agent",
+                "value": " Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+                "type": "text"
+              },
+              {
+                "key": "x-device-fingerprint",
+                "value": "1hgtilh",
+                "type": "text"
+              },
+              {
+                "key": "x-device-id",
+                "value": "01JV70TKSFGV9Z1QWEYV3N5APC",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{authToken1}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"businessLocationId\": \"{{businessLocationId}}\",\r\n  \"contactPerson\": {\r\n    \"_id\": \"{{contactPersonId}}\",\r\n    \"name\": \"{{contactName}}\",\r\n    \"email\": \"{{contactEmail}}\",\r\n    \"phone\": \"{{contactPhone}}\"\r\n  },\r\n  \"scheduledDate\": \"20-10-2026\",\r\n  \"numberOfParcels\": \"{{parcels}}\",\r\n  \"hasBigItems\": false,\r\n  \"repeatedData\": { \"repeatedType\": \"One Time\" },\r\n  \"creationSrc\": \"Web\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{stgBaseUrl}}/api/v2/pickups",
+              "host": [
+                "{{stgBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "pickups"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "API1-VAL-003 — numberOfParcels = 0",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"0 parcels is rejected\", function () {\r",
+                  "  pm.expect(pm.response.code).to.be.oneOf([400, 422]);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": " application/json, text/plain, */*",
+                "type": "text"
+              },
+              {
+                "key": "accept-language",
+                "value": " en",
+                "type": "text"
+              },
+              {
+                "key": "content-type",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "origin",
+                "value": " https://stg-business.bosta.co",
+                "type": "text"
+              },
+              {
+                "key": "priority",
+                "value": " u=1, i",
+                "type": "text"
+              },
+              {
+                "key": "referer",
+                "value": " https://stg-business.bosta.co/",
+                "type": "text"
+              },
+              {
+                "key": "sec-ch-ua",
+                "value": " \"Google Chrome\";v=\"137\", \"Chromium\";v=\"137\", \"Not/A)Brand\";v=\"24\"",
+                "type": "text"
+              },
+              {
+                "key": "sec-ch-ua-mobile",
+                "value": " ?0",
+                "type": "text"
+              },
+              {
+                "key": "sec-ch-ua-platform",
+                "value": " \"Windows\"",
+                "type": "text"
+              },
+              {
+                "key": "sec-fetch-dest",
+                "value": " empty",
+                "type": "text"
+              },
+              {
+                "key": "sec-fetch-mode",
+                "value": " cors",
+                "type": "text"
+              },
+              {
+                "key": "sec-fetch-site",
+                "value": " same-site",
+                "type": "text"
+              },
+              {
+                "key": "user-agent",
+                "value": " Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+                "type": "text"
+              },
+              {
+                "key": "x-device-fingerprint",
+                "value": "1hgtilh",
+                "type": "text"
+              },
+              {
+                "key": "x-device-id",
+                "value": "01JV70TKSFGV9Z1QWEYV3N5APC",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{authToken1}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"businessLocationId\": \"{{businessLocationId}}\",\r\n  \"contactPerson\": {\r\n    \"_id\": \"{{contactPersonId}}\",\r\n    \"name\": \"{{contactName}}\",\r\n    \"email\": \"{{contactEmail}}\",\r\n    \"phone\": \"{{contactPhone}}\"\r\n  },\r\n  \"scheduledDate\": \"{{scheduledDate}}\",\r\n  \"numberOfParcels\": \"0\",\r\n  \"hasBigItems\": false,\r\n  \"repeatedData\": { \"repeatedType\": \"One Time\" },\r\n  \"creationSrc\": \"Web\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{stgBaseUrl}}/api/v2/pickups",
+              "host": [
+                "{{stgBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "pickups"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "API1-VAL-004 — numberOfParcels = -1",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Number of parcels cannot be negative\", function () {\r",
+                  "  pm.expect(pm.response.code).to.be.oneOf([400, 422]);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": " application/json, text/plain, */*",
+                "type": "text"
+              },
+              {
+                "key": "accept-language",
+                "value": " en",
+                "type": "text"
+              },
+              {
+                "key": "content-type",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "origin",
+                "value": " https://stg-business.bosta.co",
+                "type": "text"
+              },
+              {
+                "key": "priority",
+                "value": " u=1, i",
+                "type": "text"
+              },
+              {
+                "key": "referer",
+                "value": " https://stg-business.bosta.co/",
+                "type": "text"
+              },
+              {
+                "key": "sec-ch-ua",
+                "value": " \"Google Chrome\";v=\"137\", \"Chromium\";v=\"137\", \"Not/A)Brand\";v=\"24\"",
+                "type": "text"
+              },
+              {
+                "key": "sec-ch-ua-mobile",
+                "value": " ?0",
+                "type": "text"
+              },
+              {
+                "key": "sec-ch-ua-platform",
+                "value": " \"Windows\"",
+                "type": "text"
+              },
+              {
+                "key": "sec-fetch-dest",
+                "value": " empty",
+                "type": "text"
+              },
+              {
+                "key": "sec-fetch-mode",
+                "value": " cors",
+                "type": "text"
+              },
+              {
+                "key": "sec-fetch-site",
+                "value": " same-site",
+                "type": "text"
+              },
+              {
+                "key": "user-agent",
+                "value": " Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+                "type": "text"
+              },
+              {
+                "key": "x-device-fingerprint",
+                "value": "1hgtilh",
+                "type": "text"
+              },
+              {
+                "key": "x-device-id",
+                "value": "01JV70TKSFGV9Z1QWEYV3N5APC",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{authToken1}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"businessLocationId\": \"{{businessLocationId}}\",\r\n  \"contactPerson\": {\r\n    \"_id\": \"{{contactPersonId}}\",\r\n    \"name\": \"{{contactName}}\",\r\n    \"email\": \"{{contactEmail}}\",\r\n    \"phone\": \"{{contactPhone}}\"\r\n  },\r\n  \"scheduledDate\": \"{{scheduledDate}}\",\r\n  \"numberOfParcels\": \"-1\",\r\n  \"hasBigItems\": false,\r\n  \"repeatedData\": { \"repeatedType\": \"One Time\" },\r\n  \"creationSrc\": \"Web\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{stgBaseUrl}}/api/v2/pickups",
+              "host": [
+                "{{stgBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "pickups"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "API1-VAL-005 — numberOfParcels extremely large (abuse)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Extremely large number of parcels rejected\", function () {\r",
+                  "  pm.expect(pm.response.code).to.be.oneOf([400, 422]);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": " application/json, text/plain, */*",
+                "type": "text"
+              },
+              {
+                "key": "accept-language",
+                "value": " en",
+                "type": "text"
+              },
+              {
+                "key": "content-type",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "origin",
+                "value": " https://stg-business.bosta.co",
+                "type": "text"
+              },
+              {
+                "key": "priority",
+                "value": " u=1, i",
+                "type": "text"
+              },
+              {
+                "key": "referer",
+                "value": " https://stg-business.bosta.co/",
+                "type": "text"
+              },
+              {
+                "key": "sec-ch-ua",
+                "value": " \"Google Chrome\";v=\"137\", \"Chromium\";v=\"137\", \"Not/A)Brand\";v=\"24\"",
+                "type": "text"
+              },
+              {
+                "key": "sec-ch-ua-mobile",
+                "value": " ?0",
+                "type": "text"
+              },
+              {
+                "key": "sec-ch-ua-platform",
+                "value": " \"Windows\"",
+                "type": "text"
+              },
+              {
+                "key": "sec-fetch-dest",
+                "value": " empty",
+                "type": "text"
+              },
+              {
+                "key": "sec-fetch-mode",
+                "value": " cors",
+                "type": "text"
+              },
+              {
+                "key": "sec-fetch-site",
+                "value": " same-site",
+                "type": "text"
+              },
+              {
+                "key": "user-agent",
+                "value": " Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+                "type": "text"
+              },
+              {
+                "key": "x-device-fingerprint",
+                "value": "1hgtilh",
+                "type": "text"
+              },
+              {
+                "key": "x-device-id",
+                "value": "01JV70TKSFGV9Z1QWEYV3N5APC",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{authToken1}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"businessLocationId\": \"{{businessLocationId}}\",\r\n  \"contactPerson\": {\r\n    \"_id\": \"{{contactPersonId}}\",\r\n    \"name\": \"{{contactName}}\",\r\n    \"email\": \"{{contactEmail}}\",\r\n    \"phone\": \"{{contactPhone}}\"\r\n  },\r\n  \"scheduledDate\": \"{{scheduledDate}}\",\r\n  \"numberOfParcels\": \"9999999\",\r\n  \"hasBigItems\": false,\r\n  \"repeatedData\": { \"repeatedType\": \"One Time\" },\r\n  \"creationSrc\": \"Web\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{stgBaseUrl}}/api/v2/pickups",
+              "host": [
+                "{{stgBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "pickups"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "API1-TAMP-001 — Try to override fees",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Tampering fields are not honored\", function () {\r",
+                  "  pm.expect(pm.response.code).to.be.oneOf([200,201,202,400,422]);\r",
+                  "});\r",
+                  "pm.test(\"No server error\", () => pm.expect(pm.response.code).to.be.below(500));\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": " application/json, text/plain, */*",
+                "type": "text"
+              },
+              {
+                "key": "accept-language",
+                "value": " en",
+                "type": "text"
+              },
+              {
+                "key": "content-type",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "origin",
+                "value": " https://stg-business.bosta.co",
+                "type": "text"
+              },
+              {
+                "key": "priority",
+                "value": " u=1, i",
+                "type": "text"
+              },
+              {
+                "key": "referer",
+                "value": " https://stg-business.bosta.co/",
+                "type": "text"
+              },
+              {
+                "key": "sec-ch-ua",
+                "value": " \"Google Chrome\";v=\"137\", \"Chromium\";v=\"137\", \"Not/A)Brand\";v=\"24\"",
+                "type": "text"
+              },
+              {
+                "key": "sec-ch-ua-mobile",
+                "value": " ?0",
+                "type": "text"
+              },
+              {
+                "key": "sec-ch-ua-platform",
+                "value": " \"Windows\"",
+                "type": "text"
+              },
+              {
+                "key": "sec-fetch-dest",
+                "value": " empty",
+                "type": "text"
+              },
+              {
+                "key": "sec-fetch-mode",
+                "value": " cors",
+                "type": "text"
+              },
+              {
+                "key": "sec-fetch-site",
+                "value": " same-site",
+                "type": "text"
+              },
+              {
+                "key": "user-agent",
+                "value": " Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+                "type": "text"
+              },
+              {
+                "key": "x-device-fingerprint",
+                "value": "1hgtilh",
+                "type": "text"
+              },
+              {
+                "key": "x-device-id",
+                "value": "01JV70TKSFGV9Z1QWEYV3N5APC",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{authToken1}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"businessLocationId\": \"{{businessLocationId}}\",\r\n  \"contactPerson\": {\r\n    \"_id\": \"{{contactPersonId}}\",\r\n    \"name\": \"{{contactName}}\",\r\n    \"email\": \"{{contactEmail}}\",\r\n    \"phone\": \"{{contactPhone}}\"\r\n  },\r\n  \"scheduledDate\": \"{{scheduledDate}}\",\r\n  \"numberOfParcels\": \"200\",\r\n  \"hasBigItems\": false,\r\n  \"repeatedData\": { \"repeatedType\": \"One Time\" },\r\n  \"creationSrc\": \"Web\",\r\n  \"fees\": 0,\r\n  \"walletDeduction\": 0\r\n\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{stgBaseUrl}}/api/v2/pickups",
+              "host": [
+                "{{stgBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "pickups"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "API1-LOGIC-001 — Send same request twice (duplicate creation check)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"First call is success\", function () {\r",
+                  "  pm.expect(pm.response.code).to.be.oneOf([200,201,202]);\r",
+                  "});\r",
+                  "\r",
+                  "pm.sendRequest({\r",
+                  "  url: pm.request.url.toString(),\r",
+                  "  method: \"POST\",\r",
+                  "  header: pm.request.headers.toObject(),\r",
+                  "  body: { mode: \"raw\", raw: pm.request.body.raw }\r",
+                  "}, function (err, res) {\r",
+                  "  pm.test(\"Second call does not crash\", function () {\r",
+                  "    pm.expect(err).to.equal(null);\r",
+                  "    pm.expect(res.code).to.be.below(500);\r",
+                  "  });\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": " application/json, text/plain, */*",
+                "type": "text"
+              },
+              {
+                "key": "accept-language",
+                "value": " en",
+                "type": "text"
+              },
+              {
+                "key": "content-type",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "origin",
+                "value": " https://stg-business.bosta.co",
+                "type": "text"
+              },
+              {
+                "key": "priority",
+                "value": " u=1, i",
+                "type": "text"
+              },
+              {
+                "key": "referer",
+                "value": " https://stg-business.bosta.co/",
+                "type": "text"
+              },
+              {
+                "key": "sec-ch-ua",
+                "value": " \"Google Chrome\";v=\"137\", \"Chromium\";v=\"137\", \"Not/A)Brand\";v=\"24\"",
+                "type": "text"
+              },
+              {
+                "key": "sec-ch-ua-mobile",
+                "value": " ?0",
+                "type": "text"
+              },
+              {
+                "key": "sec-ch-ua-platform",
+                "value": " \"Windows\"",
+                "type": "text"
+              },
+              {
+                "key": "sec-fetch-dest",
+                "value": " empty",
+                "type": "text"
+              },
+              {
+                "key": "sec-fetch-mode",
+                "value": " cors",
+                "type": "text"
+              },
+              {
+                "key": "sec-fetch-site",
+                "value": " same-site",
+                "type": "text"
+              },
+              {
+                "key": "user-agent",
+                "value": " Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+                "type": "text"
+              },
+              {
+                "key": "x-device-fingerprint",
+                "value": "1hgtilh",
+                "type": "text"
+              },
+              {
+                "key": "x-device-id",
+                "value": "01JV70TKSFGV9Z1QWEYV3N5APC",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{authToken1}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"businessLocationId\": \"{{businessLocationId}}\",\r\n  \"contactPerson\": {\r\n    \"_id\": \"{{contactPersonId}}\",\r\n    \"name\": \"{{contactName}}\",\r\n    \"email\": \"{{contactEmail}}\",\r\n    \"phone\": \"{{contactPhone}}\"\r\n  },\r\n  \"scheduledDate\": \"{{scheduledDate}}\",\r\n  \"numberOfParcels\": \"200\",\r\n  \"hasBigItems\": false,\r\n  \"repeatedData\": { \"repeatedType\": \"One Time\" },\r\n  \"creationSrc\": \"Web\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{stgBaseUrl}}/api/v2/pickups",
+              "host": [
+                "{{stgBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "pickups"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              "// scheduledDate = (last stored scheduledDate + 1 day)\r",
+              "// Uses collection variables so it works in Newman/CI.\r",
+              "// Stores date-only in YYYY-MM-DD.\r",
+              "\r",
+              "// 1) Read last stored date (YYYY-MM-DD)\r",
+              "const last = pm.collectionVariables.get(\"scheduledDate\");\r",
+              "\r",
+              "// 2) Parse last date safely, otherwise fallback to today + baseDaysAhead\r",
+              "const baseDaysAhead = parseInt(pm.collectionVariables.get(\"baseDaysAhead\") || \"2\", 10);\r",
+              "\r",
+              "let d;\r",
+              "if (last && /^\\d{4}-\\d{2}-\\d{2}$/.test(last)) {\r",
+              "  // Parse as local midnight to avoid timezone surprises\r",
+              "  d = new Date(last + \"T00:00:00\");\r",
+              "} else {\r",
+              "  d = new Date();\r",
+              "  d.setDate(d.getDate() + baseDaysAhead);\r",
+              "}\r",
+              "\r",
+              "// 3) Increment by 1 day for uniqueness\r",
+              "d.setDate(d.getDate() + 1);\r",
+              "\r",
+              "// 4) Format YYYY-MM-DD (date-only)\r",
+              "const yyyy = d.getFullYear();\r",
+              "const mm = String(d.getMonth() + 1).padStart(2, \"0\");\r",
+              "const dd = String(d.getDate()).padStart(2, \"0\");\r",
+              "const next = `${yyyy}-${mm}-${dd}`;\r",
+              "\r",
+              "// 5) Store back into collection variables\r",
+              "pm.collectionVariables.set(\"scheduledDate\", next);\r",
+              "\r",
+              "// Optional: log for debugging\r",
+              "console.log(\"previous scheduledDate =\", last);\r",
+              "console.log(\"next scheduledDate =\", next);\r",
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "API2 — Update Bank Info (Security)",
+      "item": [
+        {
+          "name": "Generate token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "// Parse the JSON response",
+                  "const jsonData = pm.response.json();",
+                  "",
+                  "// Extract the token value and store it in the collection variable \"authToken2\"",
+                  "pm.collectionVariables.set(\"authToken2\", jsonData.token);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{stgBaseUrl}}/api/v2/users/generate-token-for-interview-task",
+              "host": [
+                "{{stgBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "users",
+                "generate-token-for-interview-task"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "API2 - Base",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"No 5xx\", function () {\r",
+                  "  pm.expect(pm.response.code).to.be.below(500);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response is JSON if Content-Type says JSON\", function () {\r",
+                  "  const ct = pm.response.headers.get(\"Content-Type\") || \"\";\r",
+                  "  if (ct.toLowerCase().includes(\"application/json\")) {\r",
+                  "    pm.response.to.be.json;\r",
+                  "  } else {\r",
+                  "    pm.expect(true).to.eql(true);\r",
+                  "  }\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"No sensitive/internal leakage\", function () {\r",
+                  "  const raw = pm.response.text();\r",
+                  "  pm.expect(raw).to.not.match(/stack\\s*trace|traceback|exception|node_modules|\\/var\\/|c:\\\\\\\\|sql|mongodb/i);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept-Language",
+                "value": " en",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{authToken2}}",
+                "type": "text"
+              },
+              {
+                "key": "kJVU0lORVNTX0FETUlOIl0sImJ1c2luZXNzQWRtaW5JbmZvIjp7ImJ1c2luZXNzSWQiOiI2U2xuRmpodjVPR",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "WFESWFBZWVjdGciLCJidXNpbmVzc05hbWUiOiJ0ZXN0IGNvbXBhbnkgbmFtZSJ9LCJlbWFpbCI6ImFtaXJ",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "hLm1vc2ErOTkxQGJvc3RhLmNvIiwicGhvbmUiOiIrMjAxMDU1NTkyODI5IiwiY291bnRyeSI6eyJfaWQiOiI2M",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "GU0NDgyYzdjYjdkNGJjNDg0OWM0ZDUiLCJuYW1lIjoiRWd5cHQiLCJuYW1lQXIiOiLZhdi12LEiLCJjb2RlIjoi",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "RUcifSwidG9rZW5UeXBlIjoiQUNDRVNTIiwidG9rZW5WZXJzaW9uIjoiVjIiLCJzZXNzaW9uSWQiOiIwMUsw",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "WkdRTTJZQkJKQzdOTkQ5UldGVkJUViIsImlhdCI6MTc1MzQwNDgxNCwiZXhwIjoxNzU0NjE0NDE0fQ.b7wI",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "o0ko7JpblvR3h6Kp0fekW1TW4fGxoYPwoOoVTk8",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "x-device-id",
+                "value": "01K0ZH74759AR8ER1NZSS478R6",
+                "type": "text"
+              },
+              {
+                "key": "X-DEVICE-FINGERPRINT",
+                "value": "1iwjpzb",
+                "type": "text"
+              },
+              {
+                "key": "Referer",
+                "value": " https://stg-business.bosta.co/",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"bankInfo\": {\r\n    \"beneficiaryName\": \"test name\",\r\n    \"bankName\": \"NBG - البنك الأهلي اليوناني مصر\",\r\n    \"accountNumber\": \"1234567891011\",\r\n    \"ibanNumber\": \"EG123456789012345678901255555\"\r\n  },\r\n  \"paymentInfoOtp\": \"1234\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{stgBaseUrl}}/api/v2/businesses/add-bank-info",
+              "host": [
+                "{{stgBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "businesses",
+                "add-bank-info"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "API2-OTP-001 — Wrong OTP",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"OTP is enforced (4xx)\", function () {\r",
+                  "  pm.expect(pm.response.code).to.be.oneOf([400,401,403,422]);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Body indicates OTP failure\", function () {\r",
+                  "  pm.response.to.be.json;\r",
+                  "  const body = pm.response.json();\r",
+                  "  pm.expect(body).to.have.property(\"success\", false);\r",
+                  "  pm.expect(body).to.have.property(\"message\");\r",
+                  "  pm.expect(body.message.toLowerCase()).to.match(/otp|expired|wrong/);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept-Language",
+                "value": " en",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVydmIxOWNKT0E4M044eHY2d0lzUCIsInJvbGVzIjpbIkJVU0lORVNTX0FETUlOIl0sImJ1c2luZXNzQWRtaW5JbmZvIjp7ImJ1c2luZXNzSWQiOiI2U2xuRmpodjVPRWFESWFBZWVjdGciLCJidXNpbmVzc05hbWUiOiJ0ZXN0IGNvbXBhbnkgbmFtZSJ9LCJlbWFpbCI6ImFtaXJhLm1vc2ErOTkxQGJvc3RhLmNvIiwicGhvbmUiOiIrMjAxMDU1NTkyODI5IiwiY291bnRyeSI6eyJfaWQiOiI2MGU0NDgyYzdjYjdkNGJjNDg0OWM0ZDUiLCJuYW1lIjoiRWd5cHQiLCJuYW1lQXIiOiLZhdi12LEiLCJjb2RlIjoiRUcifSwidG9rZW5UeXBlIjoiQUNDRVNTIiwidG9rZW5WZXJzaW9uIjoiVjIiLCJzZXNzaW9uSWQiOiIwMUtGMVc1QlhIUVE4VzVLU0E0UFM3Uzg0MiIsImlhdCI6MTc2ODUxNTg3NCwiZXhwIjoxNzY5NzI1NDc0fQ.hSS517JXVDjWYFd9YprDPC2mEKoUxRUNUMX4xYRAmIo",
+                "type": "text"
+              },
+              {
+                "key": "kJVU0lORVNTX0FETUlOIl0sImJ1c2luZXNzQWRtaW5JbmZvIjp7ImJ1c2luZXNzSWQiOiI2U2xuRmpodjVPR",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "WFESWFBZWVjdGciLCJidXNpbmVzc05hbWUiOiJ0ZXN0IGNvbXBhbnkgbmFtZSJ9LCJlbWFpbCI6ImFtaXJ",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "hLm1vc2ErOTkxQGJvc3RhLmNvIiwicGhvbmUiOiIrMjAxMDU1NTkyODI5IiwiY291bnRyeSI6eyJfaWQiOiI2M",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "GU0NDgyYzdjYjdkNGJjNDg0OWM0ZDUiLCJuYW1lIjoiRWd5cHQiLCJuYW1lQXIiOiLZhdi12LEiLCJjb2RlIjoi",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "RUcifSwidG9rZW5UeXBlIjoiQUNDRVNTIiwidG9rZW5WZXJzaW9uIjoiVjIiLCJzZXNzaW9uSWQiOiIwMUsw",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "WkdRTTJZQkJKQzdOTkQ5UldGVkJUViIsImlhdCI6MTc1MzQwNDgxNCwiZXhwIjoxNzU0NjE0NDE0fQ.b7wI",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "o0ko7JpblvR3h6Kp0fekW1TW4fGxoYPwoOoVTk8",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "x-device-id",
+                "value": "01K0ZH74759AR8ER1NZSS478R6",
+                "type": "text"
+              },
+              {
+                "key": "X-DEVICE-FINGERPRINT",
+                "value": "1iwjpzb",
+                "type": "text"
+              },
+              {
+                "key": "Referer",
+                "value": " https://stg-business.bosta.co/",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"bankInfo\": {\r\n    \"beneficiaryName\": \"test name\",\r\n    \"bankName\": \"NBG - البنك الأهلي اليوناني مصر\",\r\n    \"accountNumber\": \"1234567891011\",\r\n    \"ibanNumber\": \"EG123456789012345678901255555\"\r\n  },\r\n  \"paymentInfoOtp\": \"123\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{stgBaseUrl}}/api/v2/businesses/add-bank-info",
+              "host": [
+                "{{stgBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "businesses",
+                "add-bank-info"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "API2-OTP-002 — Missing OTP",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Missing OTP rejected\", function () {\r",
+                  "  pm.expect(pm.response.code).to.be.oneOf([400,422]);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept-Language",
+                "value": " en",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVydmIxOWNKT0E4M044eHY2d0lzUCIsInJvbGVzIjpbIkJVU0lORVNTX0FETUlOIl0sImJ1c2luZXNzQWRtaW5JbmZvIjp7ImJ1c2luZXNzSWQiOiI2U2xuRmpodjVPRWFESWFBZWVjdGciLCJidXNpbmVzc05hbWUiOiJ0ZXN0IGNvbXBhbnkgbmFtZSJ9LCJlbWFpbCI6ImFtaXJhLm1vc2ErOTkxQGJvc3RhLmNvIiwicGhvbmUiOiIrMjAxMDU1NTkyODI5IiwiY291bnRyeSI6eyJfaWQiOiI2MGU0NDgyYzdjYjdkNGJjNDg0OWM0ZDUiLCJuYW1lIjoiRWd5cHQiLCJuYW1lQXIiOiLZhdi12LEiLCJjb2RlIjoiRUcifSwidG9rZW5UeXBlIjoiQUNDRVNTIiwidG9rZW5WZXJzaW9uIjoiVjIiLCJzZXNzaW9uSWQiOiIwMUtGMVc1QlhIUVE4VzVLU0E0UFM3Uzg0MiIsImlhdCI6MTc2ODUxNTg3NCwiZXhwIjoxNzY5NzI1NDc0fQ.hSS517JXVDjWYFd9YprDPC2mEKoUxRUNUMX4xYRAmIo",
+                "type": "text"
+              },
+              {
+                "key": "kJVU0lORVNTX0FETUlOIl0sImJ1c2luZXNzQWRtaW5JbmZvIjp7ImJ1c2luZXNzSWQiOiI2U2xuRmpodjVPR",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "WFESWFBZWVjdGciLCJidXNpbmVzc05hbWUiOiJ0ZXN0IGNvbXBhbnkgbmFtZSJ9LCJlbWFpbCI6ImFtaXJ",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "hLm1vc2ErOTkxQGJvc3RhLmNvIiwicGhvbmUiOiIrMjAxMDU1NTkyODI5IiwiY291bnRyeSI6eyJfaWQiOiI2M",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "GU0NDgyYzdjYjdkNGJjNDg0OWM0ZDUiLCJuYW1lIjoiRWd5cHQiLCJuYW1lQXIiOiLZhdi12LEiLCJjb2RlIjoi",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "RUcifSwidG9rZW5UeXBlIjoiQUNDRVNTIiwidG9rZW5WZXJzaW9uIjoiVjIiLCJzZXNzaW9uSWQiOiIwMUsw",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "WkdRTTJZQkJKQzdOTkQ5UldGVkJUViIsImlhdCI6MTc1MzQwNDgxNCwiZXhwIjoxNzU0NjE0NDE0fQ.b7wI",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "o0ko7JpblvR3h6Kp0fekW1TW4fGxoYPwoOoVTk8",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "x-device-id",
+                "value": "01K0ZH74759AR8ER1NZSS478R6",
+                "type": "text"
+              },
+              {
+                "key": "X-DEVICE-FINGERPRINT",
+                "value": "1iwjpzb",
+                "type": "text"
+              },
+              {
+                "key": "Referer",
+                "value": " https://stg-business.bosta.co/",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"bankInfo\": {\r\n    \"beneficiaryName\": \"test name\",\r\n    \"bankName\": \"NBG - البنك الأهلي اليوناني مصر\",\r\n    \"accountNumber\": \"1234567891011\",\r\n    \"ibanNumber\": \"EG123456789012345678901255555\"\r\n  }\r\n\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{stgBaseUrl}}/api/v2/businesses/add-bank-info",
+              "host": [
+                "{{stgBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "businesses",
+                "add-bank-info"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "API2-OTP-003 — OTP non-numeric",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Invalid OTP format rejected\", function () {\r",
+                  "  pm.expect(pm.response.code).to.be.oneOf([400,422,401,403]);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept-Language",
+                "value": " en",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVydmIxOWNKT0E4M044eHY2d0lzUCIsInJvbGVzIjpbIkJVU0lORVNTX0FETUlOIl0sImJ1c2luZXNzQWRtaW5JbmZvIjp7ImJ1c2luZXNzSWQiOiI2U2xuRmpodjVPRWFESWFBZWVjdGciLCJidXNpbmVzc05hbWUiOiJ0ZXN0IGNvbXBhbnkgbmFtZSJ9LCJlbWFpbCI6ImFtaXJhLm1vc2ErOTkxQGJvc3RhLmNvIiwicGhvbmUiOiIrMjAxMDU1NTkyODI5IiwiY291bnRyeSI6eyJfaWQiOiI2MGU0NDgyYzdjYjdkNGJjNDg0OWM0ZDUiLCJuYW1lIjoiRWd5cHQiLCJuYW1lQXIiOiLZhdi12LEiLCJjb2RlIjoiRUcifSwidG9rZW5UeXBlIjoiQUNDRVNTIiwidG9rZW5WZXJzaW9uIjoiVjIiLCJzZXNzaW9uSWQiOiIwMUtGMVc1QlhIUVE4VzVLU0E0UFM3Uzg0MiIsImlhdCI6MTc2ODUxNTg3NCwiZXhwIjoxNzY5NzI1NDc0fQ.hSS517JXVDjWYFd9YprDPC2mEKoUxRUNUMX4xYRAmIo",
+                "type": "text"
+              },
+              {
+                "key": "kJVU0lORVNTX0FETUlOIl0sImJ1c2luZXNzQWRtaW5JbmZvIjp7ImJ1c2luZXNzSWQiOiI2U2xuRmpodjVPR",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "WFESWFBZWVjdGciLCJidXNpbmVzc05hbWUiOiJ0ZXN0IGNvbXBhbnkgbmFtZSJ9LCJlbWFpbCI6ImFtaXJ",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "hLm1vc2ErOTkxQGJvc3RhLmNvIiwicGhvbmUiOiIrMjAxMDU1NTkyODI5IiwiY291bnRyeSI6eyJfaWQiOiI2M",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "GU0NDgyYzdjYjdkNGJjNDg0OWM0ZDUiLCJuYW1lIjoiRWd5cHQiLCJuYW1lQXIiOiLZhdi12LEiLCJjb2RlIjoi",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "RUcifSwidG9rZW5UeXBlIjoiQUNDRVNTIiwidG9rZW5WZXJzaW9uIjoiVjIiLCJzZXNzaW9uSWQiOiIwMUsw",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "WkdRTTJZQkJKQzdOTkQ5UldGVkJUViIsImlhdCI6MTc1MzQwNDgxNCwiZXhwIjoxNzU0NjE0NDE0fQ.b7wI",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "o0ko7JpblvR3h6Kp0fekW1TW4fGxoYPwoOoVTk8",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "x-device-id",
+                "value": "01K0ZH74759AR8ER1NZSS478R6",
+                "type": "text"
+              },
+              {
+                "key": "X-DEVICE-FINGERPRINT",
+                "value": "1iwjpzb",
+                "type": "text"
+              },
+              {
+                "key": "Referer",
+                "value": " https://stg-business.bosta.co/",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"bankInfo\": {\r\n    \"beneficiaryName\": \"test name\",\r\n    \"bankName\": \"NBG - البنك الأهلي اليوناني مصر\",\r\n    \"accountNumber\": \"1234567891011\",\r\n    \"ibanNumber\": \"EG123456789012345678901255555\"\r\n  },\r\n  \"paymentInfoOtp\": \"12ab\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{stgBaseUrl}}/api/v2/businesses/add-bank-info",
+              "host": [
+                "{{stgBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "businesses",
+                "add-bank-info"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "API2-OTP-004 — OTP too long",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Invalid OTP format rejected\", function () {\r",
+                  "  pm.expect(pm.response.code).to.be.oneOf([400,422,401,403]);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept-Language",
+                "value": " en",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVydmIxOWNKT0E4M044eHY2d0lzUCIsInJvbGVzIjpbIkJVU0lORVNTX0FETUlOIl0sImJ1c2luZXNzQWRtaW5JbmZvIjp7ImJ1c2luZXNzSWQiOiI2U2xuRmpodjVPRWFESWFBZWVjdGciLCJidXNpbmVzc05hbWUiOiJ0ZXN0IGNvbXBhbnkgbmFtZSJ9LCJlbWFpbCI6ImFtaXJhLm1vc2ErOTkxQGJvc3RhLmNvIiwicGhvbmUiOiIrMjAxMDU1NTkyODI5IiwiY291bnRyeSI6eyJfaWQiOiI2MGU0NDgyYzdjYjdkNGJjNDg0OWM0ZDUiLCJuYW1lIjoiRWd5cHQiLCJuYW1lQXIiOiLZhdi12LEiLCJjb2RlIjoiRUcifSwidG9rZW5UeXBlIjoiQUNDRVNTIiwidG9rZW5WZXJzaW9uIjoiVjIiLCJzZXNzaW9uSWQiOiIwMUtGMVc1QlhIUVE4VzVLU0E0UFM3Uzg0MiIsImlhdCI6MTc2ODUxNTg3NCwiZXhwIjoxNzY5NzI1NDc0fQ.hSS517JXVDjWYFd9YprDPC2mEKoUxRUNUMX4xYRAmIo",
+                "type": "text"
+              },
+              {
+                "key": "kJVU0lORVNTX0FETUlOIl0sImJ1c2luZXNzQWRtaW5JbmZvIjp7ImJ1c2luZXNzSWQiOiI2U2xuRmpodjVPR",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "WFESWFBZWVjdGciLCJidXNpbmVzc05hbWUiOiJ0ZXN0IGNvbXBhbnkgbmFtZSJ9LCJlbWFpbCI6ImFtaXJ",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "hLm1vc2ErOTkxQGJvc3RhLmNvIiwicGhvbmUiOiIrMjAxMDU1NTkyODI5IiwiY291bnRyeSI6eyJfaWQiOiI2M",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "GU0NDgyYzdjYjdkNGJjNDg0OWM0ZDUiLCJuYW1lIjoiRWd5cHQiLCJuYW1lQXIiOiLZhdi12LEiLCJjb2RlIjoi",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "RUcifSwidG9rZW5UeXBlIjoiQUNDRVNTIiwidG9rZW5WZXJzaW9uIjoiVjIiLCJzZXNzaW9uSWQiOiIwMUsw",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "WkdRTTJZQkJKQzdOTkQ5UldGVkJUViIsImlhdCI6MTc1MzQwNDgxNCwiZXhwIjoxNzU0NjE0NDE0fQ.b7wI",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "o0ko7JpblvR3h6Kp0fekW1TW4fGxoYPwoOoVTk8",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "x-device-id",
+                "value": "01K0ZH74759AR8ER1NZSS478R6",
+                "type": "text"
+              },
+              {
+                "key": "X-DEVICE-FINGERPRINT",
+                "value": "1iwjpzb",
+                "type": "text"
+              },
+              {
+                "key": "Referer",
+                "value": " https://stg-business.bosta.co/",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"bankInfo\": {\r\n    \"beneficiaryName\": \"test name\",\r\n    \"bankName\": \"NBG - البنك الأهلي اليوناني مصر\",\r\n    \"accountNumber\": \"1234567891011\",\r\n    \"ibanNumber\": \"EG123456789012345678901255555\"\r\n  },\r\n  \"paymentInfoOtp\": \"12345671212844223910\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{stgBaseUrl}}/api/v2/businesses/add-bank-info",
+              "host": [
+                "{{stgBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "businesses",
+                "add-bank-info"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "API2-AUTH-001 — Missing Authorization",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Unauthorized without token\", function () {\r",
+                  "  pm.expect(pm.response.code).to.be.oneOf([401,403]);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept-Language",
+                "value": " en",
+                "type": "text"
+              },
+              {
+                "key": "kJVU0lORVNTX0FETUlOIl0sImJ1c2luZXNzQWRtaW5JbmZvIjp7ImJ1c2luZXNzSWQiOiI2U2xuRmpodjVPR",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "WFESWFBZWVjdGciLCJidXNpbmVzc05hbWUiOiJ0ZXN0IGNvbXBhbnkgbmFtZSJ9LCJlbWFpbCI6ImFtaXJ",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "hLm1vc2ErOTkxQGJvc3RhLmNvIiwicGhvbmUiOiIrMjAxMDU1NTkyODI5IiwiY291bnRyeSI6eyJfaWQiOiI2M",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "GU0NDgyYzdjYjdkNGJjNDg0OWM0ZDUiLCJuYW1lIjoiRWd5cHQiLCJuYW1lQXIiOiLZhdi12LEiLCJjb2RlIjoi",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "RUcifSwidG9rZW5UeXBlIjoiQUNDRVNTIiwidG9rZW5WZXJzaW9uIjoiVjIiLCJzZXNzaW9uSWQiOiIwMUsw",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "WkdRTTJZQkJKQzdOTkQ5UldGVkJUViIsImlhdCI6MTc1MzQwNDgxNCwiZXhwIjoxNzU0NjE0NDE0fQ.b7wI",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "o0ko7JpblvR3h6Kp0fekW1TW4fGxoYPwoOoVTk8",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "x-device-id",
+                "value": "01K0ZH74759AR8ER1NZSS478R6",
+                "type": "text"
+              },
+              {
+                "key": "X-DEVICE-FINGERPRINT",
+                "value": "1iwjpzb",
+                "type": "text"
+              },
+              {
+                "key": "Referer",
+                "value": " https://stg-business.bosta.co/",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"bankInfo\": {\r\n    \"beneficiaryName\": \"test name\",\r\n    \"bankName\": \"NBG - البنك الأهلي اليوناني مصر\",\r\n    \"accountNumber\": \"1234567891011\",\r\n    \"ibanNumber\": \"EG123456789012345678901255555\"\r\n  },\r\n  \"paymentInfoOtp\": \"1234\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{stgBaseUrl}}/api/v2/businesses/add-bank-info",
+              "host": [
+                "{{stgBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "businesses",
+                "add-bank-info"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "API2-AUTH-002 — Invalid token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Unauthorized without token\", function () {\r",
+                  "  pm.expect(pm.response.code).to.be.oneOf([401,403]);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept-Language",
+                "value": " en",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "invalid_token",
+                "type": "text"
+              },
+              {
+                "key": "kJVU0lORVNTX0FETUlOIl0sImJ1c2luZXNzQWRtaW5JbmZvIjp7ImJ1c2luZXNzSWQiOiI2U2xuRmpodjVPR",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "WFESWFBZWVjdGciLCJidXNpbmVzc05hbWUiOiJ0ZXN0IGNvbXBhbnkgbmFtZSJ9LCJlbWFpbCI6ImFtaXJ",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "hLm1vc2ErOTkxQGJvc3RhLmNvIiwicGhvbmUiOiIrMjAxMDU1NTkyODI5IiwiY291bnRyeSI6eyJfaWQiOiI2M",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "GU0NDgyYzdjYjdkNGJjNDg0OWM0ZDUiLCJuYW1lIjoiRWd5cHQiLCJuYW1lQXIiOiLZhdi12LEiLCJjb2RlIjoi",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "RUcifSwidG9rZW5UeXBlIjoiQUNDRVNTIiwidG9rZW5WZXJzaW9uIjoiVjIiLCJzZXNzaW9uSWQiOiIwMUsw",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "WkdRTTJZQkJKQzdOTkQ5UldGVkJUViIsImlhdCI6MTc1MzQwNDgxNCwiZXhwIjoxNzU0NjE0NDE0fQ.b7wI",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "o0ko7JpblvR3h6Kp0fekW1TW4fGxoYPwoOoVTk8",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "x-device-id",
+                "value": "01K0ZH74759AR8ER1NZSS478R6",
+                "type": "text"
+              },
+              {
+                "key": "X-DEVICE-FINGERPRINT",
+                "value": "1iwjpzb",
+                "type": "text"
+              },
+              {
+                "key": "Referer",
+                "value": " https://stg-business.bosta.co/",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"bankInfo\": {\r\n    \"beneficiaryName\": \"test name\",\r\n    \"bankName\": \"NBG - البنك الأهلي اليوناني مصر\",\r\n    \"accountNumber\": \"1234567891011\",\r\n    \"ibanNumber\": \"EG123456789012345678901255555\"\r\n  },\r\n  \"paymentInfoOtp\": \"1234\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{stgBaseUrl}}/api/v2/businesses/add-bank-info",
+              "host": [
+                "{{stgBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "businesses",
+                "add-bank-info"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "API2-DATA-001 — Response does not echo full IBAN/account",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"No full IBAN/account number leaked in response\", function () {\r",
+                  "  const raw = pm.response.text();\r",
+                  "  pm.expect(raw).to.not.include(pm.environment.get(\"iban\"));\r",
+                  "  pm.expect(raw).to.not.include(pm.environment.get(\"accountNumber\"));\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept-Language",
+                "value": " en",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVydmIxOWNKT0E4M044eHY2d0lzUCIsInJvbGVzIjpbIkJVU0lORVNTX0FETUlOIl0sImJ1c2luZXNzQWRtaW5JbmZvIjp7ImJ1c2luZXNzSWQiOiI2U2xuRmpodjVPRWFESWFBZWVjdGciLCJidXNpbmVzc05hbWUiOiJ0ZXN0IGNvbXBhbnkgbmFtZSJ9LCJlbWFpbCI6ImFtaXJhLm1vc2ErOTkxQGJvc3RhLmNvIiwicGhvbmUiOiIrMjAxMDU1NTkyODI5IiwiY291bnRyeSI6eyJfaWQiOiI2MGU0NDgyYzdjYjdkNGJjNDg0OWM0ZDUiLCJuYW1lIjoiRWd5cHQiLCJuYW1lQXIiOiLZhdi12LEiLCJjb2RlIjoiRUcifSwidG9rZW5UeXBlIjoiQUNDRVNTIiwidG9rZW5WZXJzaW9uIjoiVjIiLCJzZXNzaW9uSWQiOiIwMUtGMVc1QlhIUVE4VzVLU0E0UFM3Uzg0MiIsImlhdCI6MTc2ODUxNTg3NCwiZXhwIjoxNzY5NzI1NDc0fQ.hSS517JXVDjWYFd9YprDPC2mEKoUxRUNUMX4xYRAmIo",
+                "type": "text"
+              },
+              {
+                "key": "kJVU0lORVNTX0FETUlOIl0sImJ1c2luZXNzQWRtaW5JbmZvIjp7ImJ1c2luZXNzSWQiOiI2U2xuRmpodjVPR",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "WFESWFBZWVjdGciLCJidXNpbmVzc05hbWUiOiJ0ZXN0IGNvbXBhbnkgbmFtZSJ9LCJlbWFpbCI6ImFtaXJ",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "hLm1vc2ErOTkxQGJvc3RhLmNvIiwicGhvbmUiOiIrMjAxMDU1NTkyODI5IiwiY291bnRyeSI6eyJfaWQiOiI2M",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "GU0NDgyYzdjYjdkNGJjNDg0OWM0ZDUiLCJuYW1lIjoiRWd5cHQiLCJuYW1lQXIiOiLZhdi12LEiLCJjb2RlIjoi",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "RUcifSwidG9rZW5UeXBlIjoiQUNDRVNTIiwidG9rZW5WZXJzaW9uIjoiVjIiLCJzZXNzaW9uSWQiOiIwMUsw",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "WkdRTTJZQkJKQzdOTkQ5UldGVkJUViIsImlhdCI6MTc1MzQwNDgxNCwiZXhwIjoxNzU0NjE0NDE0fQ.b7wI",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "o0ko7JpblvR3h6Kp0fekW1TW4fGxoYPwoOoVTk8",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "x-device-id",
+                "value": "01K0ZH74759AR8ER1NZSS478R6",
+                "type": "text"
+              },
+              {
+                "key": "X-DEVICE-FINGERPRINT",
+                "value": "1iwjpzb",
+                "type": "text"
+              },
+              {
+                "key": "Referer",
+                "value": " https://stg-business.bosta.co/",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"bankInfo\": {\r\n    \"beneficiaryName\": \"test name\",\r\n    \"bankName\": \"NBG - البنك الأهلي اليوناني مصر\",\r\n    \"accountNumber\": \"1234567891011\",\r\n    \"ibanNumber\": \"EG123456789012345678901255555\"\r\n  },\r\n  \"paymentInfoOtp\": \"1234\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{stgBaseUrl}}/api/v2/businesses/add-bank-info",
+              "host": [
+                "{{stgBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "businesses",
+                "add-bank-info"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "API2-TAMP-001 — Inject businessId + fees fields",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 403\", function () {\r",
+                  "    pm.response.to.have.status(403);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept-Language",
+                "value": " en",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVydmIxOWNKT0E4M044eHY2d0lzUCIsInJvbGVzIjpbIkJVU0lORVNTX0FETUlOIl0sImJ1c2luZXNzQWRtaW5JbmZvIjp7ImJ1c2luZXNzSWQiOiI2U2xuRmpodjVPRWFESWFBZWVjdGciLCJidXNpbmVzc05hbWUiOiJ0ZXN0IGNvbXBhbnkgbmFtZSJ9LCJlbWFpbCI6ImFtaXJhLm1vc2ErOTkxQGJvc3RhLmNvIiwicGhvbmUiOiIrMjAxMDU1NTkyODI5IiwiY291bnRyeSI6eyJfaWQiOiI2MGU0NDgyYzdjYjdkNGJjNDg0OWM0ZDUiLCJuYW1lIjoiRWd5cHQiLCJuYW1lQXIiOiLZhdi12LEiLCJjb2RlIjoiRUcifSwidG9rZW5UeXBlIjoiQUNDRVNTIiwidG9rZW5WZXJzaW9uIjoiVjIiLCJzZXNzaW9uSWQiOiIwMUtGMVc1QlhIUVE4VzVLU0E0UFM3Uzg0MiIsImlhdCI6MTc2ODUxNTg3NCwiZXhwIjoxNzY5NzI1NDc0fQ.hSS517JXVDjWYFd9YprDPC2mEKoUxRUNUMX4xYRAmIo",
+                "type": "text"
+              },
+              {
+                "key": "kJVU0lORVNTX0FETUlOIl0sImJ1c2luZXNzQWRtaW5JbmZvIjp7ImJ1c2luZXNzSWQiOiI2U2xuRmpodjVPR",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "WFESWFBZWVjdGciLCJidXNpbmVzc05hbWUiOiJ0ZXN0IGNvbXBhbnkgbmFtZSJ9LCJlbWFpbCI6ImFtaXJ",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "hLm1vc2ErOTkxQGJvc3RhLmNvIiwicGhvbmUiOiIrMjAxMDU1NTkyODI5IiwiY291bnRyeSI6eyJfaWQiOiI2M",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "GU0NDgyYzdjYjdkNGJjNDg0OWM0ZDUiLCJuYW1lIjoiRWd5cHQiLCJuYW1lQXIiOiLZhdi12LEiLCJjb2RlIjoi",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "RUcifSwidG9rZW5UeXBlIjoiQUNDRVNTIiwidG9rZW5WZXJzaW9uIjoiVjIiLCJzZXNzaW9uSWQiOiIwMUsw",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "WkdRTTJZQkJKQzdOTkQ5UldGVkJUViIsImlhdCI6MTc1MzQwNDgxNCwiZXhwIjoxNzU0NjE0NDE0fQ.b7wI",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "o0ko7JpblvR3h6Kp0fekW1TW4fGxoYPwoOoVTk8",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "x-device-id",
+                "value": "01K0ZH74759AR8ER1NZSS478R6",
+                "type": "text"
+              },
+              {
+                "key": "X-DEVICE-FINGERPRINT",
+                "value": "1iwjpzb",
+                "type": "text"
+              },
+              {
+                "key": "Referer",
+                "value": " https://stg-business.bosta.co/",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"bankInfo\": {\r\n    \"beneficiaryName\": \"test name\",\r\n    \"bankName\": \"NBG - البنك الأهلي اليوناني مصر\",\r\n    \"accountNumber\": \"1234567891011\",\r\n    \"ibanNumber\": \"EG123456789012345678901255555\"\r\n  },\r\n  \"paymentInfoOtp\": \"1234\",\r\n  \"businessId\": \"OTHER_BUSINESS\",\r\n  \"fees\": 0,\r\n  \"walletDeduction\": 0,\r\n  \"status\": \"Approved\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{stgBaseUrl}}/api/v2/businesses/add-bank-info",
+              "host": [
+                "{{stgBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "businesses",
+                "add-bank-info"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "API2-ABUSE — Wrong OTP Burst",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// API2-ABUSE — Sequential wrong-OTP attempts using pm.sendRequest\r",
+                  "// Adjust safely (10–20 is enough to observe throttling)\r",
+                  "const MAX_ATTEMPTS = parseInt(\"20\", 10);\r",
+                  "const DELAY_MS = parseInt(\"150\", 10); // small delay\r",
+                  "\r",
+                  "const url = pm.request.url.toString();\r",
+                  "const method = pm.request.method;\r",
+                  "\r",
+                  "// Convert headers to a plain object\r",
+                  "const headersObj = {};\r",
+                  "pm.request.headers.each(h => { headersObj[h.key] = h.value; });\r",
+                  "\r",
+                  "// Use the exact current raw body\r",
+                  "const rawBody = pm.request.body && pm.request.body.raw ? pm.request.body.raw : \"\";\r",
+                  "\r",
+                  "let results = [];\r",
+                  "let i = 0;\r",
+                  "\r",
+                  "function sendOne() {\r",
+                  "  i++;\r",
+                  "\r",
+                  "  pm.sendRequest({\r",
+                  "    url,\r",
+                  "    method,\r",
+                  "    header: headersObj,\r",
+                  "    body: { mode: \"raw\", raw: rawBody }\r",
+                  "  }, function (err, res) {\r",
+                  "    if (err) {\r",
+                  "      results.push({ attempt: i, error: String(err) });\r",
+                  "    } else {\r",
+                  "      let msg = \"\";\r",
+                  "      try {\r",
+                  "        const b = res.json();\r",
+                  "        msg = b.message || b.error || \"\";\r",
+                  "      } catch (e) {\r",
+                  "        msg = res.text();\r",
+                  "      }\r",
+                  "      results.push({\r",
+                  "        attempt: i,\r",
+                  "        code: res.code,\r",
+                  "        message: (msg || \"\").toString().slice(0, 120)\r",
+                  "      });\r",
+                  "    }\r",
+                  "\r",
+                  "    if (i < MAX_ATTEMPTS) {\r",
+                  "      setTimeout(sendOne, DELAY_MS);\r",
+                  "    } else {\r",
+                  "      // Summarize and assert\r",
+                  "      const codes = results.map(r => r.code).filter(Boolean);\r",
+                  "      const has429 = codes.includes(429);\r",
+                  "      const has5xx = codes.some(c => c >= 500);\r",
+                  "\r",
+                  "      console.log(\"Bruteforce summary:\", results);\r",
+                  "\r",
+                  "      pm.test(\"No 5xx responses during repeated wrong OTP attempts\", function () {\r",
+                  "        pm.expect(has5xx).to.eql(false);\r",
+                  "      });\r",
+                  "\r",
+                  "      pm.test(\"Server enforces OTP (responses are 4xx or 429)\", function () {\r",
+                  "        // Accept 400/401/403/422 (OTP wrong) and optionally 429 (rate limit)\r",
+                  "        const allowed = [400, 401, 403, 422, 429];\r",
+                  "        codes.forEach(c => pm.expect(allowed).to.include(c));\r",
+                  "      });\r",
+                  "\r",
+                  "      // Store results for later reporting\r",
+                  "      pm.environment.set(\"api2_bruteforce_results\", JSON.stringify(results, null, 2));\r",
+                  "    }\r",
+                  "  });\r",
+                  "}\r",
+                  "\r",
+                  "sendOne();\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept-Language",
+                "value": " en",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVydmIxOWNKT0E4M044eHY2d0lzUCIsInJvbGVzIjpbIkJVU0lORVNTX0FETUlOIl0sImJ1c2luZXNzQWRtaW5JbmZvIjp7ImJ1c2luZXNzSWQiOiI2U2xuRmpodjVPRWFESWFBZWVjdGciLCJidXNpbmVzc05hbWUiOiJ0ZXN0IGNvbXBhbnkgbmFtZSJ9LCJlbWFpbCI6ImFtaXJhLm1vc2ErOTkxQGJvc3RhLmNvIiwicGhvbmUiOiIrMjAxMDU1NTkyODI5IiwiY291bnRyeSI6eyJfaWQiOiI2MGU0NDgyYzdjYjdkNGJjNDg0OWM0ZDUiLCJuYW1lIjoiRWd5cHQiLCJuYW1lQXIiOiLZhdi12LEiLCJjb2RlIjoiRUcifSwidG9rZW5UeXBlIjoiQUNDRVNTIiwidG9rZW5WZXJzaW9uIjoiVjIiLCJzZXNzaW9uSWQiOiIwMUtGMVc1QlhIUVE4VzVLU0E0UFM3Uzg0MiIsImlhdCI6MTc2ODUxNTg3NCwiZXhwIjoxNzY5NzI1NDc0fQ.hSS517JXVDjWYFd9YprDPC2mEKoUxRUNUMX4xYRAmIo",
+                "type": "text"
+              },
+              {
+                "key": "kJVU0lORVNTX0FETUlOIl0sImJ1c2luZXNzQWRtaW5JbmZvIjp7ImJ1c2luZXNzSWQiOiI2U2xuRmpodjVPR",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "WFESWFBZWVjdGciLCJidXNpbmVzc05hbWUiOiJ0ZXN0IGNvbXBhbnkgbmFtZSJ9LCJlbWFpbCI6ImFtaXJ",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "hLm1vc2ErOTkxQGJvc3RhLmNvIiwicGhvbmUiOiIrMjAxMDU1NTkyODI5IiwiY291bnRyeSI6eyJfaWQiOiI2M",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "GU0NDgyYzdjYjdkNGJjNDg0OWM0ZDUiLCJuYW1lIjoiRWd5cHQiLCJuYW1lQXIiOiLZhdi12LEiLCJjb2RlIjoi",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "RUcifSwidG9rZW5UeXBlIjoiQUNDRVNTIiwidG9rZW5WZXJzaW9uIjoiVjIiLCJzZXNzaW9uSWQiOiIwMUsw",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "WkdRTTJZQkJKQzdOTkQ5UldGVkJUViIsImlhdCI6MTc1MzQwNDgxNCwiZXhwIjoxNzU0NjE0NDE0fQ.b7wI",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "o0ko7JpblvR3h6Kp0fekW1TW4fGxoYPwoOoVTk8",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "x-device-id",
+                "value": "01K0ZH74759AR8ER1NZSS478R6",
+                "type": "text"
+              },
+              {
+                "key": "X-DEVICE-FINGERPRINT",
+                "value": "1iwjpzb",
+                "type": "text"
+              },
+              {
+                "key": "Referer",
+                "value": " https://stg-business.bosta.co/",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"bankInfo\": {\r\n    \"beneficiaryName\": \"test name\",\r\n    \"bankName\": \"NBG - البنك الأهلي اليوناني مصر\",\r\n    \"accountNumber\": \"1234567891011\",\r\n    \"ibanNumber\": \"EG123456789012345678901255555\"\r\n  },\r\n  \"paymentInfoOtp\": \"1234\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{stgBaseUrl}}/api/v2/businesses/add-bank-info",
+              "host": [
+                "{{stgBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "businesses",
+                "add-bank-info"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "API3 — Forget Password (Security)",
+      "item": [
+        {
+          "name": "API3 - Base",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// FP-BASE — Validate success response and store baseline for enumeration comparison\r",
+                  "\r",
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response is JSON\", function () {\r",
+                  "  pm.response.to.be.json;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response contract is correct\", function () {\r",
+                  "  const body = pm.response.json();\r",
+                  "\r",
+                  "  pm.expect(body).to.have.property(\"success\", true);\r",
+                  "  pm.expect(body).to.have.property(\"message\");\r",
+                  "  pm.expect(body.message).to.be.a(\"string\");\r",
+                  "  pm.expect(body.message).to.eql(\"Reset link sent to your mail.\");\r",
+                  "  pm.expect(body).to.have.property(\"data\");\r",
+                  "  pm.expect(body.data).to.eql(null);\r",
+                  "});\r",
+                  "\r",
+                  "// Store a baseline signature so we can detect email enumeration later\r",
+                  "const baseBody = pm.response.json();\r",
+                  "pm.environment.set(\"fp_baseline_status\", String(pm.response.code));\r",
+                  "pm.environment.set(\"fp_baseline_success\", String(baseBody.success));\r",
+                  "pm.environment.set(\"fp_baseline_message\", baseBody.message);\r",
+                  "pm.environment.set(\"fp_baseline_data_is_null\", String(baseBody.data === null));\r",
+                  "\r",
+                  "pm.test(\"Response does not include reset link/token\", function () {\r",
+                  "  const raw = pm.response.text().toLowerCase();\r",
+                  "\r",
+                  "  // Avoid returning any link/token in the API response body\r",
+                  "  pm.expect(raw).to.not.match(/https?:\\/\\/|token=|reset\\//i);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept-Language",
+                "value": " en",
+                "type": "text"
+              },
+              {
+                "key": "x-device-id",
+                "value": " {{deviceId}}",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "Authorization",
+                "value": "{{authToken3}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\":\"amira.mosa+991^@bosta.co\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{stgBaseUrl}}/api/v2/users/forget-password",
+              "host": [
+                "{{stgBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "users",
+                "forget-password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "API3-ENUM-001 — Non-existing email should behave like existing",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// FP-ENUM — Non-existing email should not reveal account existence\r",
+                  "\r",
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response is JSON\", function () {\r",
+                  "  pm.response.to.be.json;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response does not enumerate users (matches baseline)\", function () {\r",
+                  "  const body = pm.response.json();\r",
+                  "\r",
+                  "  const baseStatus = pm.environment.get(\"fp_baseline_status\");\r",
+                  "  const baseSuccess = pm.environment.get(\"fp_baseline_success\");\r",
+                  "  const baseMsg = pm.environment.get(\"fp_baseline_message\");\r",
+                  "  const baseDataNull = pm.environment.get(\"fp_baseline_data_is_null\");\r",
+                  "\r",
+                  "  // If baseline wasn't run first, fail clearly\r",
+                  "  pm.expect(baseStatus, \"Run FP-BASE first to store baseline\").to.not.eql(null);\r",
+                  "\r",
+                  "  pm.expect(String(pm.response.code)).to.eql(String(baseStatus));\r",
+                  "  pm.expect(String(body.success)).to.eql(String(baseSuccess));\r",
+                  "  pm.expect(body.message).to.eql(baseMsg);\r",
+                  "  pm.expect(String(body.data === null)).to.eql(String(baseDataNull));\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response does not include reset link/token\", function () {\r",
+                  "  const raw = pm.response.text().toLowerCase();\r",
+                  "\r",
+                  "  // Avoid returning any link/token in the API response body\r",
+                  "  pm.expect(raw).to.not.match(/https?:\\/\\/|token=|reset\\//i);\r",
+                  "});\r",
+                  "\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept-Language",
+                "value": " en",
+                "type": "text"
+              },
+              {
+                "key": "x-device-id",
+                "value": " {{deviceId}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\":\"amira.fgfgfgmodfgdfdfgsa+ddfgfdgdfgsddd991^@bosta.co\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{stgBaseUrl}}/api/v2/users/forget-password",
+              "host": [
+                "{{stgBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "users",
+                "forget-password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "API3-AUTH-001 — No Authorization header",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// API3-AUTH-001 — No Authorization header\r",
+                  "// Accept either: behaves like Base (public endpoint) OR returns 401/403 (protected)\r",
+                  "\r",
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "const ct = (pm.response.headers.get(\"Content-Type\") || \"\").toLowerCase();\r",
+                  "if (ct.includes(\"application/json\") && [200,201,202].includes(pm.response.code)) {\r",
+                  "  const body = pm.response.json();\r",
+                  "\r",
+                  "  pm.test(\"If 2xx, response matches Base contract\", function () {\r",
+                  "    pm.expect(body).to.have.property(\"success\", true);\r",
+                  "    pm.expect(body).to.have.property(\"message\");\r",
+                  "    pm.expect(body.message).to.eql(\"Reset link sent to your mail.\");\r",
+                  "    pm.expect(body).to.have.property(\"data\");\r",
+                  "    pm.expect(body.data).to.eql(null);\r",
+                  "  });\r",
+                  "}\r",
+                  "\r",
+                  "pm.test(\"No reset link/token leaked\", function () {\r",
+                  "  const raw = pm.response.text();\r",
+                  "  pm.expect(raw).to.not.match(/https?:\\/\\//i);\r",
+                  "  pm.expect(raw).to.not.match(/token=|reset_token|resetToken|jwt/i);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"No internal leakage\", function () {\r",
+                  "  const raw = pm.response.text();\r",
+                  "  pm.expect(raw).to.not.match(/stack\\s*trace|traceback|exception|node_modules|\\/var\\/|c:\\\\\\\\|sql|mongodb|mongoose/i);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept-Language",
+                "value": " en",
+                "type": "text"
+              },
+              {
+                "key": "x-device-id",
+                "value": " {{deviceId}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\":\"amira.mosa+991^@bosta.co\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{stgBaseUrl}}/api/v2/users/forget-password",
+              "host": [
+                "{{stgBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "users",
+                "forget-password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "API3-AUTH-002 — Invalid Authorization token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// API3-AUTH-001 — No Authorization header\r",
+                  "// Accept either: behaves like Base (public endpoint) OR returns 401/403 (protected)\r",
+                  "\r",
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "const ct = (pm.response.headers.get(\"Content-Type\") || \"\").toLowerCase();\r",
+                  "if (ct.includes(\"application/json\") && [200,201,202].includes(pm.response.code)) {\r",
+                  "  const body = pm.response.json();\r",
+                  "\r",
+                  "  pm.test(\"If 2xx, response matches Base contract\", function () {\r",
+                  "    pm.expect(body).to.have.property(\"success\", true);\r",
+                  "    pm.expect(body).to.have.property(\"message\");\r",
+                  "    pm.expect(body.message).to.eql(\"Reset link sent to your mail.\");\r",
+                  "    pm.expect(body).to.have.property(\"data\");\r",
+                  "    pm.expect(body.data).to.eql(null);\r",
+                  "  });\r",
+                  "}\r",
+                  "\r",
+                  "pm.test(\"No reset link/token leaked\", function () {\r",
+                  "  const raw = pm.response.text();\r",
+                  "  pm.expect(raw).to.not.match(/https?:\\/\\//i);\r",
+                  "  pm.expect(raw).to.not.match(/token=|reset_token|resetToken|jwt/i);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"No internal leakage\", function () {\r",
+                  "  const raw = pm.response.text();\r",
+                  "  pm.expect(raw).to.not.match(/stack\\s*trace|traceback|exception|node_modules|\\/var\\/|c:\\\\\\\\|sql|mongodb|mongoose/i);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept-Language",
+                "value": " en",
+                "type": "text"
+              },
+              {
+                "key": "x-device-id",
+                "value": "01JV70TKSFGV9Z1QWEYV3N5APC",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "invalid_token",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\":\"amira.mosa+991^@bosta.co\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{stgBaseUrl}}/api/v2/users/forget-password",
+              "host": [
+                "{{stgBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "users",
+                "forget-password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "API3-VAL-001 — Missing email field",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// API3-VAL-001 — Missing email field should be rejected cleanly\r",
+                  "\r",
+                  "pm.test(\"Status code is 400\", function () {\r",
+                  "    pm.response.to.have.status(400);\r",
+                  "});\r",
+                  "pm.test(\"If JSON, contains meaningful validation message\", function () {\r",
+                  "  const ct = (pm.response.headers.get(\"Content-Type\") || \"\").toLowerCase();\r",
+                  "  if (ct.includes(\"application/json\")) {\r",
+                  "    const body = pm.response.json();\r",
+                  "    const msg = body.message || body.error || body.Message || body.Error || \"\";\r",
+                  "    pm.expect(msg).to.be.a(\"string\").and.not.eql(\"\");\r",
+                  "    pm.expect(msg.toLowerCase()).to.match(/email|required|missing|invalid/);\r",
+                  "  } else {\r",
+                  "    pm.expect(pm.response.text().length).to.be.greaterThan(0);\r",
+                  "  }\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"No internal leakage\", function () {\r",
+                  "  const raw = pm.response.text();\r",
+                  "  pm.expect(raw).to.not.match(/stack\\s*trace|traceback|exception|node_modules|\\/var\\/|c:\\\\\\\\|sql|mongodb|mongoose/i);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept-Language",
+                "value": " en",
+                "type": "text"
+              },
+              {
+                "key": "x-device-id",
+                "value": " {{deviceId}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{stgBaseUrl}}/api/v2/users/forget-password",
+              "host": [
+                "{{stgBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "users",
+                "forget-password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "API3-VAL-002 — Empty email",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// API3-VAL-001 — Missing email field should be rejected cleanly\r",
+                  "\r",
+                  "pm.test(\"Status code is 400\", function () {\r",
+                  "    pm.response.to.have.status(400);\r",
+                  "});\r",
+                  "pm.test(\"If JSON, contains meaningful validation message\", function () {\r",
+                  "  const ct = (pm.response.headers.get(\"Content-Type\") || \"\").toLowerCase();\r",
+                  "  if (ct.includes(\"application/json\")) {\r",
+                  "    const body = pm.response.json();\r",
+                  "    const msg = body.message || body.error || body.Message || body.Error || \"\";\r",
+                  "    pm.expect(msg).to.be.a(\"string\").and.not.eql(\"\");\r",
+                  "    pm.expect(msg.toLowerCase()).to.match(/email|required|missing|invalid/);\r",
+                  "  } else {\r",
+                  "    pm.expect(pm.response.text().length).to.be.greaterThan(0);\r",
+                  "  }\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"No internal leakage\", function () {\r",
+                  "  const raw = pm.response.text();\r",
+                  "  pm.expect(raw).to.not.match(/stack\\s*trace|traceback|exception|node_modules|\\/var\\/|c:\\\\\\\\|sql|mongodb|mongoose/i);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept-Language",
+                "value": " en",
+                "type": "text"
+              },
+              {
+                "key": "x-device-id",
+                "value": " {{deviceId}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\":\"\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{stgBaseUrl}}/api/v2/users/forget-password",
+              "host": [
+                "{{stgBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "users",
+                "forget-password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "API3-VAL-003 — Invalid email format",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// API3-VAL-001 — Missing email field should be rejected cleanly\r",
+                  "\r",
+                  "pm.test(\"Status code is 400\", function () {\r",
+                  "    pm.response.to.have.status(400);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"No internal leakage\", function () {\r",
+                  "  const raw = pm.response.text();\r",
+                  "  pm.expect(raw).to.not.match(/stack\\s*trace|traceback|exception|node_modules|\\/var\\/|c:\\\\\\\\|sql|mongodb|mongoose/i);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept-Language",
+                "value": " en",
+                "type": "text"
+              },
+              {
+                "key": "x-device-id",
+                "value": " {{deviceId}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\":\"easdmail\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{stgBaseUrl}}/api/v2/users/forget-password",
+              "host": [
+                "{{stgBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "users",
+                "forget-password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "API3-ABUSE-001 — Repeat forget-password requests (safe burst)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const MAX_ATTEMPTS = parseInt(pm.environment.get(\"bruteforceAttempts\") || \"20\", 10);\r",
+                  "const DELAY_MS = parseInt(pm.environment.get(\"bruteforceDelayMs\") || \"200\", 10);\r",
+                  "\r",
+                  "const url = pm.request.url.toString();\r",
+                  "const method = pm.request.method;\r",
+                  "\r",
+                  "const headersObj = {};\r",
+                  "pm.request.headers.each(h => { headersObj[h.key] = h.value; });\r",
+                  "\r",
+                  "const rawBody = pm.request.body && pm.request.body.raw ? pm.request.body.raw : \"\";\r",
+                  "\r",
+                  "let results = [];\r",
+                  "let i = 0;\r",
+                  "\r",
+                  "function sendOne() {\r",
+                  "  i++;\r",
+                  "\r",
+                  "  pm.sendRequest({\r",
+                  "    url,\r",
+                  "    method,\r",
+                  "    header: headersObj,\r",
+                  "    body: { mode: \"raw\", raw: rawBody }\r",
+                  "  }, function (err, res) {\r",
+                  "    if (err) {\r",
+                  "      results.push({ attempt: i, error: String(err) });\r",
+                  "    } else {\r",
+                  "      results.push({ attempt: i, code: res.code });\r",
+                  "    }\r",
+                  "\r",
+                  "    if (i < MAX_ATTEMPTS) {\r",
+                  "      setTimeout(sendOne, DELAY_MS);\r",
+                  "    } else {\r",
+                  "      const codes = results.map(r => r.code).filter(Boolean);\r",
+                  "      const has429 = codes.includes(429);\r",
+                  "      const has5xx = codes.some(c => c >= 500);\r",
+                  "\r",
+                  "      console.log(\"Forget-password burst summary:\", results);\r",
+                  "\r",
+                  "      pm.test(\"No 5xx during repeated requests\", function () {\r",
+                  "        pm.expect(has5xx).to.eql(false);\r",
+                  "      });\r",
+                  "\r",
+                  "      pm.test(\"Optional: rate limit exists (429) or safe handling\", function () {\r",
+                  "        // informational — don’t fail if no 429\r",
+                  "        pm.expect([true, false]).to.include(has429);\r",
+                  "      });\r",
+                  "\r",
+                  "      pm.environment.set(\"fp_abuse_results\", JSON.stringify(results, null, 2));\r",
+                  "    }\r",
+                  "  });\r",
+                  "}\r",
+                  "\r",
+                  "sendOne();\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": " application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept-Language",
+                "value": " en",
+                "type": "text"
+              },
+              {
+                "key": "x-device-id",
+                "value": " {{deviceId}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\":\"amira.mosa+991^@bosta.co\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{stgBaseUrl}}/api/v2/users/forget-password",
+              "host": [
+                "{{stgBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "users",
+                "forget-password"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "stgBaseUrl",
+      "value": "https://stg-app.bosta.co"
+    },
+    {
+      "key": "authToken1",
+      "value": "bca27763f5f30353ba0ee3d2ebd8951994f5016e269bbd781798e2884274d631"
+    },
+    {
+      "key": "businessLocationId",
+      "value": "MFqXsoFhxO"
+    },
+    {
+      "key": "contactPersonId",
+      "value": "_sCFBrHGi"
+    },
+    {
+      "key": "contactName",
+      "value": "test name"
+    },
+    {
+      "key": "contactEmail",
+      "value": "amira.mosa+991^@bosta.co"
+    },
+    {
+      "key": "contactPhone",
+      "value": "+201055592829"
+    },
+    {
+      "key": "scheduledDate",
+      "value": "2027-11-19"
+    },
+    {
+      "key": "parcels",
+      "value": "3"
+    },
+    {
+      "key": "authToken2",
+      "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVydmIxOWNKT0E4M044eHY2d0lzUCIsInJvbGVzIjpbIkJVU0lORVNTX0FETUlOIl0sImJ1c2luZXNzQWRtaW5JbmZvIjp7ImJ1c2luZXNzSWQiOiI2U2xuRmpodjVPRWFESWFBZWVjdGciLCJidXNpbmVzc05hbWUiOiJ0ZXN0IGNvbXBhbnkgbmFtZSJ9LCJlbWFpbCI6ImFtaXJhLm1vc2ErOTkxQGJvc3RhLmNvIiwicGhvbmUiOiIrMjAxMDU1NTkyODI5IiwiY291bnRyeSI6eyJfaWQiOiI2MGU0NDgyYzdjYjdkNGJjNDg0OWM0ZDUiLCJuYW1lIjoiRWd5cHQiLCJuYW1lQXIiOiLZhdi12LEiLCJjb2RlIjoiRUcifSwidG9rZW5UeXBlIjoiQUNDRVNTIiwidG9rZW5WZXJzaW9uIjoiVjIiLCJzZXNzaW9uSWQiOiIwMUtGMVc1QlhIUVE4VzVLU0E0UFM3Uzg0MiIsImlhdCI6MTc2ODU2ODEwMSwiZXhwIjoxNzY5Nzc3NzAxfQ.gHtliUoplvSqsIpuWXKFZ3M0rXBIw5-rQJxcCn4PsUo"
+    },
+    {
+      "key": "authToken3",
+      "value": "bca27763f5f30353ba0ee3d2ebd8951994f5016e269bbd781798e2884274d631"
+    },
+    {
+      "key": "pickup_date_counter",
+      "value": "31"
+    }
+  ]
+}

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Bosta_Task_IV" tests="31" time="5.150">
+  <testsuite name="API1 — Create Pickup (Security) / API1-BASE — Create Pickup (valid)" id="75355392-5191-4138-ab73-576ec76905bd" timestamp="2026-01-16T13:30:31.485Z" tests="3" failures="0" errors="0" time="1.325">
+    <testcase name="Status is success (2xx)" time="1.325" classname="Api1CreatePickupSecurityApi1BaseCreatePickupValid"/>
+    <testcase name="Response is JSON" time="1.325" classname="Api1CreatePickupSecurityApi1BaseCreatePickupValid"/>
+    <testcase name="No sensitive leakage (baseline)" time="1.325" classname="Api1CreatePickupSecurityApi1BaseCreatePickupValid"/>
+  </testsuite>
+  <testsuite name="API1 — Create Pickup (Security) / API1-AUTH-001 — Missing Authorization header" id="e7073d28-3e81-4dfa-972e-275b0f9a5e20" timestamp="2026-01-16T13:30:31.485Z" tests="1" failures="0" errors="0" time="0.066">
+    <testcase name="Unauthorized without token" time="0.066" classname="Api1CreatePickupSecurityApi1Auth001MissingAuthorizationHeader"/>
+  </testsuite>
+  <testsuite name="API1 — Create Pickup (Security) / API1-AUTH-002 — Invalid token" id="687ba93f-0cf9-43e5-8013-22b175503a42" timestamp="2026-01-16T13:30:31.485Z" tests="1" failures="0" errors="0" time="0.070">
+    <testcase name="Unauthorized with invalid token" time="0.070" classname="Api1CreatePickupSecurityApi1Auth002InvalidToken"/>
+  </testsuite>
+  <testsuite name="API1 — Create Pickup (Security) / API1-AUTH-003 — Empty token" id="3f90331e-6707-4aae-b8bc-5c8fd4ffb529" timestamp="2026-01-16T13:30:31.485Z" tests="1" failures="0" errors="0" time="0.065">
+    <testcase name="Unauthorized without token" time="0.065" classname="Api1CreatePickupSecurityApi1Auth003EmptyToken"/>
+  </testsuite>
+  <testsuite name="API1 — Create Pickup (Security) / API1-AUTHZ-001" id="914b4f78-7a8f-4052-a173-7a40a43f5194" timestamp="2026-01-16T13:30:31.485Z" tests="0" failures="0" errors="0" time="0.246"/>
+  <testsuite name="API1 — Create Pickup (Security) / API1-VAL-001 — scheduledDate in the past" id="388c4a1d-85af-4012-8648-c18e86184068" timestamp="2026-01-16T13:30:31.485Z" tests="1" failures="0" errors="0" time="0.896">
+    <testcase name="Past scheduledDate is rejected" time="0.896" classname="Api1CreatePickupSecurityApi1Val001ScheduledDateInThePast"/>
+  </testsuite>
+  <testsuite name="API1 — Create Pickup (Security) / API1-VAL-002 — scheduledDate invalid format" id="a681c8df-3487-4847-b9b9-45591c0c5864" timestamp="2026-01-16T13:30:31.485Z" tests="1" failures="0" errors="0" time="0.080">
+    <testcase name="Status code is 400" time="0.080" classname="Api1CreatePickupSecurityApi1Val002ScheduledDateInvalidFormat"/>
+  </testsuite>
+  <testsuite name="API1 — Create Pickup (Security) / API1-VAL-003 — numberOfParcels = 0" id="babf760e-6cfb-4ae2-8600-4d1dccb3f73a" timestamp="2026-01-16T13:30:31.485Z" tests="1" failures="1" errors="0" time="0.305">
+    <testcase name="0 parcels is rejected" time="0.305" classname="Api1CreatePickupSecurityApi1Val003NumberOfParcels0">
+      <failure type="AssertionFailure" message="expected 200 to be one of [ 400, 422 ]">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 08aa3d18-3101-4165-aae1-4147246435cc.]]>
+        <![CDATA[Collection name: Bosta_Task_IV.]]>
+        <![CDATA[Request name: API1 — Create Pickup (Security) / API1-VAL-003 — numberOfParcels = 0.]]>
+        <![CDATA[Test description: 0 parcels is rejected.]]>
+        <![CDATA[Error message: expected 200 to be one of [ 400, 422 ].]]>
+        <![CDATA[Stacktrace: AssertionError: expected 200 to be one of [ 400, 422 ]
+   at Object.eval sandbox-script.js:1:8).]]>
+      </failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="API1 — Create Pickup (Security) / API1-VAL-004 — numberOfParcels = -1" id="22ec6ceb-ee05-4831-ab2d-005c48c2f657" timestamp="2026-01-16T13:30:31.485Z" tests="1" failures="0" errors="0" time="0.081">
+    <testcase name="Number of parcels cannot be negative" time="0.081" classname="Api1CreatePickupSecurityApi1Val004NumberOfParcels1"/>
+  </testsuite>
+  <testsuite name="API1 — Create Pickup (Security) / API1-VAL-005 — numberOfParcels extremely large (abuse)" id="457247e9-02b8-43f4-a2d3-fa01187ab6da" timestamp="2026-01-16T13:30:31.485Z" tests="1" failures="0" errors="0" time="0.084">
+    <testcase name="Extremely large number of parcels rejected" time="0.084" classname="Api1CreatePickupSecurityApi1Val005NumberOfParcelsExtremelyLargeAbuse"/>
+  </testsuite>
+  <testsuite name="API1 — Create Pickup (Security) / API1-TAMP-001 — Try to override fees" id="dfe4f823-e6f1-434e-920b-5aec128ec36e" timestamp="2026-01-16T13:30:31.485Z" tests="2" failures="0" errors="0" time="0.253">
+    <testcase name="Tampering fields are not honored" time="0.253" classname="Api1CreatePickupSecurityApi1Tamp001TryToOverrideFees"/>
+    <testcase name="No server error" time="0.253" classname="Api1CreatePickupSecurityApi1Tamp001TryToOverrideFees"/>
+  </testsuite>
+  <testsuite name="API1 — Create Pickup (Security) / API1-LOGIC-001 — Send same request twice (duplicate creation check)" id="4e6c678d-152e-4c0d-900b-c954ec3a7fa3" timestamp="2026-01-16T13:30:31.485Z" tests="2" failures="0" errors="0" time="0.241">
+    <testcase name="First call is success" time="0.241" classname="Api1CreatePickupSecurityApi1Logic001SendSameRequestTwiceDuplicateCreationCheck"/>
+    <testcase name="Second call does not crash" time="0.241" classname="Api1CreatePickupSecurityApi1Logic001SendSameRequestTwiceDuplicateCreationCheck"/>
+  </testsuite>
+  <testsuite name="API2 — Update Bank Info (Security) / Generate token" id="bcffe5ab-689b-400f-9bc9-e41db56a3f26" timestamp="2026-01-16T13:30:31.485Z" tests="1" failures="0" errors="0" time="0.068">
+    <testcase name="Status code is 200" time="0.068" classname="Api2UpdateBankInfoSecurityGenerateToken"/>
+  </testsuite>
+  <testsuite name="API2 — Update Bank Info (Security) / API2 - Base" id="5a1425c9-8cca-47c1-b874-5e2f9cff81c6" timestamp="2026-01-16T13:30:31.485Z" tests="3" failures="0" errors="0" time="0.105">
+    <testcase name="No 5xx" time="0.105" classname="Api2UpdateBankInfoSecurityApi2Base"/>
+    <testcase name="Response is JSON if Content-Type says JSON" time="0.105" classname="Api2UpdateBankInfoSecurityApi2Base"/>
+    <testcase name="No sensitive/internal leakage" time="0.105" classname="Api2UpdateBankInfoSecurityApi2Base"/>
+  </testsuite>
+  <testsuite name="API2 — Update Bank Info (Security) / API2-OTP-001 — Wrong OTP" id="34cf589a-f935-4092-91c3-e955d18add0f" timestamp="2026-01-16T13:30:31.485Z" tests="2" failures="0" errors="0" time="0.078">
+    <testcase name="OTP is enforced (4xx)" time="0.078" classname="Api2UpdateBankInfoSecurityApi2Otp001WrongOtp"/>
+    <testcase name="Body indicates OTP failure" time="0.078" classname="Api2UpdateBankInfoSecurityApi2Otp001WrongOtp"/>
+  </testsuite>
+  <testsuite name="API2 — Update Bank Info (Security) / API2-OTP-002 — Missing OTP" id="12a7e59a-410b-4adc-892f-d35777aad79f" timestamp="2026-01-16T13:30:31.485Z" tests="1" failures="0" errors="0" time="0.079">
+    <testcase name="Missing OTP rejected" time="0.079" classname="Api2UpdateBankInfoSecurityApi2Otp002MissingOtp"/>
+  </testsuite>
+  <testsuite name="API2 — Update Bank Info (Security) / API2-OTP-003 — OTP non-numeric" id="fd6a4524-5d99-485a-8f5e-cc841d7bde93" timestamp="2026-01-16T13:30:31.485Z" tests="1" failures="0" errors="0" time="0.077">
+    <testcase name="Invalid OTP format rejected" time="0.077" classname="Api2UpdateBankInfoSecurityApi2Otp003OtpNonNumeric"/>
+  </testsuite>
+  <testsuite name="API2 — Update Bank Info (Security) / API2-OTP-004 — OTP too long" id="bba632bc-c82b-4442-9f12-f67170dab31b" timestamp="2026-01-16T13:30:31.485Z" tests="1" failures="0" errors="0" time="0.078">
+    <testcase name="Invalid OTP format rejected" time="0.078" classname="Api2UpdateBankInfoSecurityApi2Otp004OtpTooLong"/>
+  </testsuite>
+  <testsuite name="API2 — Update Bank Info (Security) / API2-AUTH-001 — Missing Authorization" id="f225dd7c-2c57-4edd-a182-60b8cd729e17" timestamp="2026-01-16T13:30:31.485Z" tests="1" failures="0" errors="0" time="0.062">
+    <testcase name="Unauthorized without token" time="0.062" classname="Api2UpdateBankInfoSecurityApi2Auth001MissingAuthorization"/>
+  </testsuite>
+  <testsuite name="API2 — Update Bank Info (Security) / API2-AUTH-002 — Invalid token" id="a259edb3-0e0f-42c8-936d-9c2985bff275" timestamp="2026-01-16T13:30:31.485Z" tests="1" failures="0" errors="0" time="0.067">
+    <testcase name="Unauthorized without token" time="0.067" classname="Api2UpdateBankInfoSecurityApi2Auth002InvalidToken"/>
+  </testsuite>
+  <testsuite name="API2 — Update Bank Info (Security) / API2-DATA-001 — Response does not echo full IBAN/account" id="a81c8551-1642-4a56-bd33-b0d7fd7096b0" timestamp="2026-01-16T13:30:31.485Z" tests="1" failures="0" errors="0" time="0.087">
+    <testcase name="No full IBAN/account number leaked in response" time="0.087" classname="Api2UpdateBankInfoSecurityApi2Data001ResponseDoesNotEchoFullIbanAccount"/>
+  </testsuite>
+  <testsuite name="API2 — Update Bank Info (Security) / API2-TAMP-001 — Inject businessId + fees fields" id="3287677f-8ba3-4a93-aa17-bf8ebedde680" timestamp="2026-01-16T13:30:31.485Z" tests="1" failures="0" errors="0" time="0.077">
+    <testcase name="Status code is 403" time="0.077" classname="Api2UpdateBankInfoSecurityApi2Tamp001InjectBusinessIdFeesFields"/>
+  </testsuite>
+  <testsuite name="API2 — Update Bank Info (Security) / API2-ABUSE — Wrong OTP Burst" id="6255a674-e75e-44e7-b4aa-606a2ffd10bd" timestamp="2026-01-16T13:30:31.485Z" tests="2" failures="0" errors="0" time="0.076">
+    <testcase name="No 5xx responses during repeated wrong OTP attempts" time="0.076" classname="Api2UpdateBankInfoSecurityApi2AbuseWrongOtpBurst"/>
+    <testcase name="Server enforces OTP (responses are 4xx or 429)" time="0.076" classname="Api2UpdateBankInfoSecurityApi2AbuseWrongOtpBurst"/>
+  </testsuite>
+  <testsuite name="API3 — Forget Password (Security) / API3 - Base" id="e528d706-849e-4335-bcf2-fa73edfaf764" timestamp="2026-01-16T13:30:31.485Z" tests="4" failures="0" errors="0" time="0.067">
+    <testcase name="Status code is 200" time="0.067" classname="Api3ForgetPasswordSecurityApi3Base"/>
+    <testcase name="Response is JSON" time="0.067" classname="Api3ForgetPasswordSecurityApi3Base"/>
+    <testcase name="Response contract is correct" time="0.067" classname="Api3ForgetPasswordSecurityApi3Base"/>
+    <testcase name="Response does not include reset link/token" time="0.067" classname="Api3ForgetPasswordSecurityApi3Base"/>
+  </testsuite>
+  <testsuite name="API3 — Forget Password (Security) / API3-ENUM-001 — Non-existing email should behave like existing" id="b15d40e3-db80-4fb4-8191-f56ee51384e8" timestamp="2026-01-16T13:30:31.485Z" tests="4" failures="0" errors="0" time="0.070">
+    <testcase name="Status code is 200" time="0.070" classname="Api3ForgetPasswordSecurityApi3Enum001NonExistingEmailShouldBehaveLikeExisting"/>
+    <testcase name="Response is JSON" time="0.070" classname="Api3ForgetPasswordSecurityApi3Enum001NonExistingEmailShouldBehaveLikeExisting"/>
+    <testcase name="Response does not enumerate users (matches baseline)" time="0.070" classname="Api3ForgetPasswordSecurityApi3Enum001NonExistingEmailShouldBehaveLikeExisting"/>
+    <testcase name="Response does not include reset link/token" time="0.070" classname="Api3ForgetPasswordSecurityApi3Enum001NonExistingEmailShouldBehaveLikeExisting"/>
+  </testsuite>
+  <testsuite name="API3 — Forget Password (Security) / API3-AUTH-001 — No Authorization header" id="8c136701-7fab-4935-b89d-1eb1199bb636" timestamp="2026-01-16T13:30:31.485Z" tests="4" failures="0" errors="0" time="0.075">
+    <testcase name="Status code is 200" time="0.075" classname="Api3ForgetPasswordSecurityApi3Auth001NoAuthorizationHeader"/>
+    <testcase name="If 2xx, response matches Base contract" time="0.075" classname="Api3ForgetPasswordSecurityApi3Auth001NoAuthorizationHeader"/>
+    <testcase name="No reset link/token leaked" time="0.075" classname="Api3ForgetPasswordSecurityApi3Auth001NoAuthorizationHeader"/>
+    <testcase name="No internal leakage" time="0.075" classname="Api3ForgetPasswordSecurityApi3Auth001NoAuthorizationHeader"/>
+  </testsuite>
+  <testsuite name="API3 — Forget Password (Security) / API3-AUTH-002 — Invalid Authorization token" id="c46b5d03-4627-4bd5-8843-26164352fbc7" timestamp="2026-01-16T13:30:31.485Z" tests="4" failures="0" errors="0" time="0.071">
+    <testcase name="Status code is 200" time="0.071" classname="Api3ForgetPasswordSecurityApi3Auth002InvalidAuthorizationToken"/>
+    <testcase name="If 2xx, response matches Base contract" time="0.071" classname="Api3ForgetPasswordSecurityApi3Auth002InvalidAuthorizationToken"/>
+    <testcase name="No reset link/token leaked" time="0.071" classname="Api3ForgetPasswordSecurityApi3Auth002InvalidAuthorizationToken"/>
+    <testcase name="No internal leakage" time="0.071" classname="Api3ForgetPasswordSecurityApi3Auth002InvalidAuthorizationToken"/>
+  </testsuite>
+  <testsuite name="API3 — Forget Password (Security) / API3-VAL-001 — Missing email field" id="3e8d44a4-e76a-4880-ba3a-3e58e3ac0d9d" timestamp="2026-01-16T13:30:31.485Z" tests="3" failures="0" errors="0" time="0.063">
+    <testcase name="Status code is 400" time="0.063" classname="Api3ForgetPasswordSecurityApi3Val001MissingEmailField"/>
+    <testcase name="If JSON, contains meaningful validation message" time="0.063" classname="Api3ForgetPasswordSecurityApi3Val001MissingEmailField"/>
+    <testcase name="No internal leakage" time="0.063" classname="Api3ForgetPasswordSecurityApi3Val001MissingEmailField"/>
+  </testsuite>
+  <testsuite name="API3 — Forget Password (Security) / API3-VAL-002 — Empty email" id="4c78f573-f1c5-417f-b6c2-4b0d92527708" timestamp="2026-01-16T13:30:31.485Z" tests="3" failures="0" errors="0" time="0.062">
+    <testcase name="Status code is 400" time="0.062" classname="Api3ForgetPasswordSecurityApi3Val002EmptyEmail"/>
+    <testcase name="If JSON, contains meaningful validation message" time="0.062" classname="Api3ForgetPasswordSecurityApi3Val002EmptyEmail"/>
+    <testcase name="No internal leakage" time="0.062" classname="Api3ForgetPasswordSecurityApi3Val002EmptyEmail"/>
+  </testsuite>
+  <testsuite name="API3 — Forget Password (Security) / API3-VAL-003 — Invalid email format" id="8e1a2666-447d-48a1-870d-ad6df5293b47" timestamp="2026-01-16T13:30:31.485Z" tests="2" failures="1" errors="0" time="0.068">
+    <testcase name="Status code is 400" time="0.068" classname="Api3ForgetPasswordSecurityApi3Val003InvalidEmailFormat">
+      <failure type="AssertionFailure" message="expected response to have status code 400 but got 200">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 08aa3d18-3101-4165-aae1-4147246435cc.]]>
+        <![CDATA[Collection name: Bosta_Task_IV.]]>
+        <![CDATA[Request name: API3 — Forget Password (Security) / API3-VAL-003 — Invalid email format.]]>
+        <![CDATA[Test description: Status code is 400.]]>
+        <![CDATA[Error message: expected response to have status code 400 but got 200.]]>
+        <![CDATA[Stacktrace: AssertionError: expected response to have status code 400 but got 200
+   at Object.eval sandbox-script.js:1:30).]]>
+      </failure>
+    </testcase>
+    <testcase name="No internal leakage" time="0.068" classname="Api3ForgetPasswordSecurityApi3Val003InvalidEmailFormat"/>
+  </testsuite>
+  <testsuite name="API3 — Forget Password (Security) / API3-ABUSE-001 — Repeat forget-password requests (safe burst)" id="0f818dcb-e4cf-41bf-846b-74cde583e286" timestamp="2026-01-16T13:30:31.485Z" tests="2" failures="0" errors="0" time="0.108">
+    <testcase name="No 5xx during repeated requests" time="0.108" classname="Api3ForgetPasswordSecurityApi3Abuse001RepeatForgetPasswordRequestsSafeBurst"/>
+    <testcase name="Optional: rate limit exists (429) or safe handling" time="0.108" classname="Api3ForgetPasswordSecurityApi3Abuse001RepeatForgetPasswordRequestsSafeBurst"/>
+  </testsuite>
+</testsuites>
