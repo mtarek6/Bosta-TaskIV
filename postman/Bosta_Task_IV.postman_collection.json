@@ -239,12 +239,6 @@
                 "key": "x-device-id",
                 "value": "01JV70TKSFGV9Z1QWEYV3N5APC",
                 "type": "text"
-              },
-              {
-                "key": "Authorization",
-                "value": "{{authToken}}",
-                "type": "text",
-                "disabled": true
               }
             ],
             "body": {
@@ -1827,7 +1821,7 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVydmIxOWNKT0E4M044eHY2d0lzUCIsInJvbGVzIjpbIkJVU0lORVNTX0FETUlOIl0sImJ1c2luZXNzQWRtaW5JbmZvIjp7ImJ1c2luZXNzSWQiOiI2U2xuRmpodjVPRWFESWFBZWVjdGciLCJidXNpbmVzc05hbWUiOiJ0ZXN0IGNvbXBhbnkgbmFtZSJ9LCJlbWFpbCI6ImFtaXJhLm1vc2ErOTkxQGJvc3RhLmNvIiwicGhvbmUiOiIrMjAxMDU1NTkyODI5IiwiY291bnRyeSI6eyJfaWQiOiI2MGU0NDgyYzdjYjdkNGJjNDg0OWM0ZDUiLCJuYW1lIjoiRWd5cHQiLCJuYW1lQXIiOiLZhdi12LEiLCJjb2RlIjoiRUcifSwidG9rZW5UeXBlIjoiQUNDRVNTIiwidG9rZW5WZXJzaW9uIjoiVjIiLCJzZXNzaW9uSWQiOiIwMUtGMVc1QlhIUVE4VzVLU0E0UFM3Uzg0MiIsImlhdCI6MTc2ODUxNTg3NCwiZXhwIjoxNzY5NzI1NDc0fQ.hSS517JXVDjWYFd9YprDPC2mEKoUxRUNUMX4xYRAmIo",
+                "value": "{{authToken2}}",
                 "type": "text"
               },
               {
@@ -1945,7 +1939,7 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVydmIxOWNKT0E4M044eHY2d0lzUCIsInJvbGVzIjpbIkJVU0lORVNTX0FETUlOIl0sImJ1c2luZXNzQWRtaW5JbmZvIjp7ImJ1c2luZXNzSWQiOiI2U2xuRmpodjVPRWFESWFBZWVjdGciLCJidXNpbmVzc05hbWUiOiJ0ZXN0IGNvbXBhbnkgbmFtZSJ9LCJlbWFpbCI6ImFtaXJhLm1vc2ErOTkxQGJvc3RhLmNvIiwicGhvbmUiOiIrMjAxMDU1NTkyODI5IiwiY291bnRyeSI6eyJfaWQiOiI2MGU0NDgyYzdjYjdkNGJjNDg0OWM0ZDUiLCJuYW1lIjoiRWd5cHQiLCJuYW1lQXIiOiLZhdi12LEiLCJjb2RlIjoiRUcifSwidG9rZW5UeXBlIjoiQUNDRVNTIiwidG9rZW5WZXJzaW9uIjoiVjIiLCJzZXNzaW9uSWQiOiIwMUtGMVc1QlhIUVE4VzVLU0E0UFM3Uzg0MiIsImlhdCI6MTc2ODUxNTg3NCwiZXhwIjoxNzY5NzI1NDc0fQ.hSS517JXVDjWYFd9YprDPC2mEKoUxRUNUMX4xYRAmIo",
+                "value": "{{authToken2}}",
                 "type": "text"
               },
               {
@@ -2064,7 +2058,7 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVydmIxOWNKT0E4M044eHY2d0lzUCIsInJvbGVzIjpbIkJVU0lORVNTX0FETUlOIl0sImJ1c2luZXNzQWRtaW5JbmZvIjp7ImJ1c2luZXNzSWQiOiI2U2xuRmpodjVPRWFESWFBZWVjdGciLCJidXNpbmVzc05hbWUiOiJ0ZXN0IGNvbXBhbnkgbmFtZSJ9LCJlbWFpbCI6ImFtaXJhLm1vc2ErOTkxQGJvc3RhLmNvIiwicGhvbmUiOiIrMjAxMDU1NTkyODI5IiwiY291bnRyeSI6eyJfaWQiOiI2MGU0NDgyYzdjYjdkNGJjNDg0OWM0ZDUiLCJuYW1lIjoiRWd5cHQiLCJuYW1lQXIiOiLZhdi12LEiLCJjb2RlIjoiRUcifSwidG9rZW5UeXBlIjoiQUNDRVNTIiwidG9rZW5WZXJzaW9uIjoiVjIiLCJzZXNzaW9uSWQiOiIwMUtGMVc1QlhIUVE4VzVLU0E0UFM3Uzg0MiIsImlhdCI6MTc2ODUxNTg3NCwiZXhwIjoxNzY5NzI1NDc0fQ.hSS517JXVDjWYFd9YprDPC2mEKoUxRUNUMX4xYRAmIo",
+                "value": "{{authToken2}}",
                 "type": "text"
               },
               {
@@ -2183,7 +2177,7 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVydmIxOWNKT0E4M044eHY2d0lzUCIsInJvbGVzIjpbIkJVU0lORVNTX0FETUlOIl0sImJ1c2luZXNzQWRtaW5JbmZvIjp7ImJ1c2luZXNzSWQiOiI2U2xuRmpodjVPRWFESWFBZWVjdGciLCJidXNpbmVzc05hbWUiOiJ0ZXN0IGNvbXBhbnkgbmFtZSJ9LCJlbWFpbCI6ImFtaXJhLm1vc2ErOTkxQGJvc3RhLmNvIiwicGhvbmUiOiIrMjAxMDU1NTkyODI5IiwiY291bnRyeSI6eyJfaWQiOiI2MGU0NDgyYzdjYjdkNGJjNDg0OWM0ZDUiLCJuYW1lIjoiRWd5cHQiLCJuYW1lQXIiOiLZhdi12LEiLCJjb2RlIjoiRUcifSwidG9rZW5UeXBlIjoiQUNDRVNTIiwidG9rZW5WZXJzaW9uIjoiVjIiLCJzZXNzaW9uSWQiOiIwMUtGMVc1QlhIUVE4VzVLU0E0UFM3Uzg0MiIsImlhdCI6MTc2ODUxNTg3NCwiZXhwIjoxNzY5NzI1NDc0fQ.hSS517JXVDjWYFd9YprDPC2mEKoUxRUNUMX4xYRAmIo",
+                "value": "{{authToken2}}",
                 "type": "text"
               },
               {
@@ -2537,7 +2531,7 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVydmIxOWNKT0E4M044eHY2d0lzUCIsInJvbGVzIjpbIkJVU0lORVNTX0FETUlOIl0sImJ1c2luZXNzQWRtaW5JbmZvIjp7ImJ1c2luZXNzSWQiOiI2U2xuRmpodjVPRWFESWFBZWVjdGciLCJidXNpbmVzc05hbWUiOiJ0ZXN0IGNvbXBhbnkgbmFtZSJ9LCJlbWFpbCI6ImFtaXJhLm1vc2ErOTkxQGJvc3RhLmNvIiwicGhvbmUiOiIrMjAxMDU1NTkyODI5IiwiY291bnRyeSI6eyJfaWQiOiI2MGU0NDgyYzdjYjdkNGJjNDg0OWM0ZDUiLCJuYW1lIjoiRWd5cHQiLCJuYW1lQXIiOiLZhdi12LEiLCJjb2RlIjoiRUcifSwidG9rZW5UeXBlIjoiQUNDRVNTIiwidG9rZW5WZXJzaW9uIjoiVjIiLCJzZXNzaW9uSWQiOiIwMUtGMVc1QlhIUVE4VzVLU0E0UFM3Uzg0MiIsImlhdCI6MTc2ODUxNTg3NCwiZXhwIjoxNzY5NzI1NDc0fQ.hSS517JXVDjWYFd9YprDPC2mEKoUxRUNUMX4xYRAmIo",
+                "value": "{{authToken2}}",
                 "type": "text"
               },
               {
@@ -2655,7 +2649,7 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVydmIxOWNKT0E4M044eHY2d0lzUCIsInJvbGVzIjpbIkJVU0lORVNTX0FETUlOIl0sImJ1c2luZXNzQWRtaW5JbmZvIjp7ImJ1c2luZXNzSWQiOiI2U2xuRmpodjVPRWFESWFBZWVjdGciLCJidXNpbmVzc05hbWUiOiJ0ZXN0IGNvbXBhbnkgbmFtZSJ9LCJlbWFpbCI6ImFtaXJhLm1vc2ErOTkxQGJvc3RhLmNvIiwicGhvbmUiOiIrMjAxMDU1NTkyODI5IiwiY291bnRyeSI6eyJfaWQiOiI2MGU0NDgyYzdjYjdkNGJjNDg0OWM0ZDUiLCJuYW1lIjoiRWd5cHQiLCJuYW1lQXIiOiLZhdi12LEiLCJjb2RlIjoiRUcifSwidG9rZW5UeXBlIjoiQUNDRVNTIiwidG9rZW5WZXJzaW9uIjoiVjIiLCJzZXNzaW9uSWQiOiIwMUtGMVc1QlhIUVE4VzVLU0E0UFM3Uzg0MiIsImlhdCI6MTc2ODUxNTg3NCwiZXhwIjoxNzY5NzI1NDc0fQ.hSS517JXVDjWYFd9YprDPC2mEKoUxRUNUMX4xYRAmIo",
+                "value": "{{authToken2}}",
                 "type": "text"
               },
               {
@@ -2842,7 +2836,7 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVydmIxOWNKT0E4M044eHY2d0lzUCIsInJvbGVzIjpbIkJVU0lORVNTX0FETUlOIl0sImJ1c2luZXNzQWRtaW5JbmZvIjp7ImJ1c2luZXNzSWQiOiI2U2xuRmpodjVPRWFESWFBZWVjdGciLCJidXNpbmVzc05hbWUiOiJ0ZXN0IGNvbXBhbnkgbmFtZSJ9LCJlbWFpbCI6ImFtaXJhLm1vc2ErOTkxQGJvc3RhLmNvIiwicGhvbmUiOiIrMjAxMDU1NTkyODI5IiwiY291bnRyeSI6eyJfaWQiOiI2MGU0NDgyYzdjYjdkNGJjNDg0OWM0ZDUiLCJuYW1lIjoiRWd5cHQiLCJuYW1lQXIiOiLZhdi12LEiLCJjb2RlIjoiRUcifSwidG9rZW5UeXBlIjoiQUNDRVNTIiwidG9rZW5WZXJzaW9uIjoiVjIiLCJzZXNzaW9uSWQiOiIwMUtGMVc1QlhIUVE4VzVLU0E0UFM3Uzg0MiIsImlhdCI6MTc2ODUxNTg3NCwiZXhwIjoxNzY5NzI1NDc0fQ.hSS517JXVDjWYFd9YprDPC2mEKoUxRUNUMX4xYRAmIo",
+                "value": "{{authToken2}}",
                 "type": "text"
               },
               {
@@ -3707,7 +3701,7 @@
     },
     {
       "key": "authToken1",
-      "value": "bca27763f5f30353ba0ee3d2ebd8951994f5016e269bbd781798e2884274d631"
+      "value": ""
     },
     {
       "key": "businessLocationId",
@@ -3739,11 +3733,11 @@
     },
     {
       "key": "authToken2",
-      "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVydmIxOWNKT0E4M044eHY2d0lzUCIsInJvbGVzIjpbIkJVU0lORVNTX0FETUlOIl0sImJ1c2luZXNzQWRtaW5JbmZvIjp7ImJ1c2luZXNzSWQiOiI2U2xuRmpodjVPRWFESWFBZWVjdGciLCJidXNpbmVzc05hbWUiOiJ0ZXN0IGNvbXBhbnkgbmFtZSJ9LCJlbWFpbCI6ImFtaXJhLm1vc2ErOTkxQGJvc3RhLmNvIiwicGhvbmUiOiIrMjAxMDU1NTkyODI5IiwiY291bnRyeSI6eyJfaWQiOiI2MGU0NDgyYzdjYjdkNGJjNDg0OWM0ZDUiLCJuYW1lIjoiRWd5cHQiLCJuYW1lQXIiOiLZhdi12LEiLCJjb2RlIjoiRUcifSwidG9rZW5UeXBlIjoiQUNDRVNTIiwidG9rZW5WZXJzaW9uIjoiVjIiLCJzZXNzaW9uSWQiOiIwMUtGMVc1QlhIUVE4VzVLU0E0UFM3Uzg0MiIsImlhdCI6MTc2ODU2ODEwMSwiZXhwIjoxNzY5Nzc3NzAxfQ.gHtliUoplvSqsIpuWXKFZ3M0rXBIw5-rQJxcCn4PsUo"
+      "value": ""
     },
     {
       "key": "authToken3",
-      "value": "bca27763f5f30353ba0ee3d2ebd8951994f5016e269bbd781798e2884274d631"
+      "value": ""
     },
     {
       "key": "pickup_date_counter",

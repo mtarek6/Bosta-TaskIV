@@ -7,6 +7,6 @@
     "newman-reporter-htmlextra": "^1.23.1"
   },
   "scripts": {
-    "test:api-security": "newman run postman/Bosta_Task_IV.postman_collection.json --reporters cli,junit,htmlextra --reporter-junit-export reports/junit.xml --reporter-htmlextra-export reports/report.html --reporter-htmlextra-title \"Bosta Task IV Security Suite\" --timeout-request 30000"
+    "test:api-security": "newman run postman/Bosta_Task_IV.postman_collection.json --env-var \"authToken1=$AUTH_TOKEN1\" --env-var \"authToken3=$AUTH_TOKEN3\" --reporters cli,junit,htmlextra --reporter-junit-export reports/junit.xml --reporter-htmlextra-export reports/report.html --reporter-htmlextra-title \"Bosta Task IV Security Suite\" --timeout-request 30000"
   }
 }
