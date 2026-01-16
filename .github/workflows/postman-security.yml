@@ -25,8 +25,8 @@ jobs:
 
       - name: Run Newman collection
         env:
-          AUTH_TOKEN1: ${{ secrets.AUTH_TOKEN1 }}
-          AUTH_TOKEN3: ${{ secrets.AUTH_TOKEN3 }}
+          AUTH_TOKEN1: ${{ secrets.AUTH_TOKEN_1 }}
+          AUTH_TOKEN3: ${{ secrets.AUTH_TOKEN_3 }}
         run: |
           mkdir -p reports
           npm run test:api-security
